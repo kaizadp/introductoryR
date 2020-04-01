@@ -1,0 +1,121 @@
+﻿FTICR_ID,FT-ICRvol_ml,CoreID,CoreNo,Site,Treatment,Suction,Pore Size Domain,SampleID,Water Soluble Organic Carbon (mg/L)
+1-C6,2,C6,6,CPCRW,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-C6,23.6
+1-C7,2,C7,7,CPCRW,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-C7,33.4
+1-C8,2,C8,8,CPCRW,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-C8,23
+1-C9,2,C9,9,CPCRW,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-C9,32.3
+1-C10,2,C10,10,CPCRW,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-C10,19.2
+1-C11,2,C11,11,CPCRW,Saturation Incubation,1.5 kPa,> 300 µm,1.5-C11,33.6
+1-C12,2,C12,12,CPCRW,Saturation Incubation,1.5 kPa,> 300 µm,1.5-C12,70.7
+1-C13,2,C13,13,CPCRW,Saturation Incubation,1.5 kPa,> 300 µm,1.5-C13,32.5
+1-C14,2,C14,14,CPCRW,Saturation Incubation,1.5 kPa,> 300 µm,1.5-C14,27.8
+1-C15,2,C15,15,CPCRW,Saturation Incubation,1.5 kPa,> 300 µm,1.5-C15,99.5
+1-C16,2,C16,16,CPCRW,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-C16,25.7
+1-C17,2,C17,17,CPCRW,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-C17,19.2
+1-C18,2,C18,18,CPCRW,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-C18,33.1
+1-C19,2,C19,19,CPCRW,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-C19,11.8
+1-C20,2,C20,20,CPCRW,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-C20,16.3
+1-C21,2,C21,21,CPCRW,Drought Incubation,1.5 kPa,> 300 µm,1.5-C21,20.1
+1-C22,2,C22,22,CPCRW,Drought Incubation,1.5 kPa,> 300 µm,1.5-C22,79.8
+1-C23,2,C23,23,CPCRW,Drought Incubation,1.5 kPa,> 300 µm,1.5-C23,266.6
+1-C24,2,C24,24,CPCRW,Drought Incubation,1.5 kPa,> 300 µm,1.5-C24,112
+1-C25,2,C25,25,CPCRW,Drought Incubation,1.5 kPa,> 300 µm,1.5-C25,80.6
+1-D6,2,D6,6,DWP,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-D6,108.3
+1-D7,2,D7,7,DWP,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-D7,81.3
+1-D8,2,D8,8,DWP,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-D8,49.4
+1-D9,2,D9,9,DWP,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-D9,10.3
+1-D10,2,D10,10,DWP,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-D10,134.1
+1-D11,2,D11,11,DWP,Saturation Incubation,1.5 kPa,> 300 µm,1.5-D11,30.4
+1-D12,2,D12,12,DWP,Saturation Incubation,1.5 kPa,> 300 µm,1.5-D12,19.3
+1-D13,2,D13,13,DWP,Saturation Incubation,1.5 kPa,> 300 µm,1.5-D13,57
+1-D14,2,D14,14,DWP,Saturation Incubation,1.5 kPa,> 300 µm,1.5-D14,53.9
+1-D15,2,D15,15,DWP,Saturation Incubation,1.5 kPa,> 300 µm,1.5-D15,49.8
+1-D16,0,D16,16,DWP,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-D16,
+1-D17,2,D17,17,DWP,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-D17,36
+1-D18,2,D18,18,DWP,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-D18,78.1
+1-D19,2,D19,19,DWP,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-D19,49.1
+1-D20,2,D20,20,DWP,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-D20,22.1
+1-D21,1.5,D21,21,DWP,Drought Incubation,1.5 kPa,> 300 µm,1.5-D21,87.1
+1-D22,2,D22,22,DWP,Drought Incubation,1.5 kPa,> 300 µm,1.5-D22,64.1
+1-D23,2,D23,23,DWP,Drought Incubation,1.5 kPa,> 300 µm,1.5-D23,31.9
+1-D24,2,D24,24,DWP,Drought Incubation,1.5 kPa,> 300 µm,1.5-D24,107.1
+1-D25,2,D25,25,DWP,Drought Incubation,1.5 kPa,> 300 µm,1.5-D25,54.9
+1-S1,2,S1,1,SR,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-S1,23.5
+1-S2,2,S2,2,SR,Saturation Incubation,1.5 kPa,> 300 µm,1.5-S2,26.6
+1-S3,2,S3,3,SR,Saturation Incubation,1.5 kPa,> 300 µm,1.5-S3,32.1
+1-S4,2,S4,4,SR,Drought Incubation,1.5 kPa,> 300 µm,1.5-S4,13
+1-S5,2,S5,5,SR,Drought Incubation,1.5 kPa,> 300 µm,1.5-S5,9.4
+1-S7,2,S7,7,SR,Saturation Incubation,1.5 kPa,> 300 µm,1.5-S7,14.8
+1-S9,2,S9,9,SR,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-S9,4.9
+1-S10,2,S10,10,SR,Drought Incubation,1.5 kPa,> 300 µm,1.5-S10,15.9
+1-S11,0,S11,11,SR,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-S11,
+1-S13,2,S13,13,SR,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-S13,12.9
+1-S14,2,S14,14,SR,Drought Incubation,1.5 kPa,> 300 µm,1.5-S14,22.2
+1-S15,2,S15,15,SR,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-S15,17.2
+1-S16,2,S16,16,SR,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-S16,7.1
+1-S17,2,S17,17,SR,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-S17,6.9
+1-S18,2,S18,18,SR,Saturation Incubation,1.5 kPa,> 300 µm,1.5-S18,26
+1-S19,2,S19,19,SR,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-S19,24.9
+1-S21,2,S21,21,SR,Field Moisture Incubation,1.5 kPa,> 300 µm,1.5-S21,14.9
+1-S23,2,S23,23,SR,Time Zero Saturation,1.5 kPa,> 300 µm,1.5-S23,5.2
+1-S24,2,S24,24,SR,Saturation Incubation,1.5 kPa,> 300 µm,1.5-S24,16.3
+1-S25,2,S25,25,SR,Drought Incubation,1.5 kPa,> 300 µm,1.5-S25,9
+5-C6,2,C6,6,CPCRW,Time Zero Saturation,50 kPa,6 - 20 µm,50-C6,34.7
+5-C7,2,C7,7,CPCRW,Time Zero Saturation,50 kPa,6 - 20 µm,50-C7,19
+5-C8,2,C8,8,CPCRW,Time Zero Saturation,50 kPa,6 - 20 µm,50-C8,23.3
+5-C9,2,C9,9,CPCRW,Time Zero Saturation,50 kPa,6 - 20 µm,50-C9,43.5
+5-C10,2,C10,10,CPCRW,Time Zero Saturation,50 kPa,6 - 20 µm,50-C10,25.2
+5-C11,2,C11,11,CPCRW,Saturation Incubation,50 kPa,6 - 20 µm,50-C11,48.6
+5-C12,2,C12,12,CPCRW,Saturation Incubation,50 kPa,6 - 20 µm,50-C12,63.5
+5-C13,2,C13,13,CPCRW,Saturation Incubation,50 kPa,6 - 20 µm,50-C13,32.1
+5-C14,2,C14,14,CPCRW,Saturation Incubation,50 kPa,6 - 20 µm,50-C14,29.7
+5-C15,1,C15,15,CPCRW,Saturation Incubation,50 kPa,6 - 20 µm,50-C15,143.1
+5-C16,0.1,C16,16,CPCRW,Field Moisture Incubation,50 kPa,6 - 20 µm,50-C16,66.4
+5-C17,2,C17,17,CPCRW,Field Moisture Incubation,50 kPa,6 - 20 µm,50-C17,30.5
+5-C18,0,C18,18,CPCRW,Field Moisture Incubation,50 kPa,6 - 20 µm,50-C18,
+5-C19,0,C19,19,CPCRW,Field Moisture Incubation,50 kPa,6 - 20 µm,50-C19,
+5-C20,2,C20,20,CPCRW,Field Moisture Incubation,50 kPa,6 - 20 µm,50-C20,26.6
+5-C21,2,C21,21,CPCRW,Drought Incubation,50 kPa,6 - 20 µm,50-C21,53.6
+5-C22,1,C22,22,CPCRW,Drought Incubation,50 kPa,6 - 20 µm,50-C22,121.9
+5-C23,0.1,C23,23,CPCRW,Drought Incubation,50 kPa,6 - 20 µm,50-C23,283.8
+5-C24,2,C24,24,CPCRW,Drought Incubation,50 kPa,6 - 20 µm,50-C24,92.6
+5-C25,2,C25,25,CPCRW,Drought Incubation,50 kPa,6 - 20 µm,50-C25,382.4
+5-D6,2,D6,6,DWP,Time Zero Saturation,50 kPa,6 - 20 µm,50-D6,76.4
+5-D7,2,D7,7,DWP,Time Zero Saturation,50 kPa,6 - 20 µm,50-D7,110.6
+5-D8,0.8,D8,8,DWP,Time Zero Saturation,50 kPa,6 - 20 µm,50-D8,39.5
+5-D9,0.15,D9,9,DWP,Time Zero Saturation,50 kPa,6 - 20 µm,50-D9,
+5-D10,2,D10,10,DWP,Time Zero Saturation,50 kPa,6 - 20 µm,50-D10,142.8
+5-D11,0.3,D11,11,DWP,Saturation Incubation,50 kPa,6 - 20 µm,50-D11,46.9
+5-D12,1,D12,12,DWP,Saturation Incubation,50 kPa,6 - 20 µm,50-D12,53.9
+5-D13,0.5,D13,13,DWP,Saturation Incubation,50 kPa,6 - 20 µm,50-D13,78.7
+5-D14,2,D14,14,DWP,Saturation Incubation,50 kPa,6 - 20 µm,50-D14,94.9
+5-D15,2,D15,15,DWP,Saturation Incubation,50 kPa,6 - 20 µm,50-D15,139.1
+5-D16,0,D16,16,DWP,Field Moisture Incubation,50 kPa,6 - 20 µm,50-D16,
+5-D17,2,D17,17,DWP,Field Moisture Incubation,50 kPa,6 - 20 µm,50-D17,43.6
+5-D18,0,D18,18,DWP,Field Moisture Incubation,50 kPa,6 - 20 µm,50-D18,
+5-D19,1,D19,19,DWP,Field Moisture Incubation,50 kPa,6 - 20 µm,50-D19,81.2
+5-D20,2,D20,20,DWP,Field Moisture Incubation,50 kPa,6 - 20 µm,50-D20,32.5
+5-D21,0,D21,21,DWP,Drought Incubation,50 kPa,6 - 20 µm,50-D21,
+5-D22,1,D22,22,DWP,Drought Incubation,50 kPa,6 - 20 µm,50-D22,58.8
+5-D23,1.2,D23,23,DWP,Drought Incubation,50 kPa,6 - 20 µm,50-D23,46.7
+5-D24,0.5,D24,24,DWP,Drought Incubation,50 kPa,6 - 20 µm,50-D24,108.3
+5-D25,2,D25,25,DWP,Drought Incubation,50 kPa,6 - 20 µm,50-D25,66.1
+5-S1,2,S1,1,SR,Field Moisture Incubation,50 kPa,6 - 20 µm,50-S1,24.9
+5-S2,0.35,S2,2,SR,Saturation Incubation,50 kPa,6 - 20 µm,50-S2,
+5-S3,2,S3,3,SR,Saturation Incubation,50 kPa,6 - 20 µm,50-S3,31
+5-S4,0,S4,4,SR,Drought Incubation,50 kPa,6 - 20 µm,50-S4,
+5-S5,2,S5,5,SR,Drought Incubation,50 kPa,6 - 20 µm,50-S5,9.9
+5-S7,0,S7,7,SR,Saturation Incubation,50 kPa,6 - 20 µm,50-S7,21.6
+5-S9,2,S9,9,SR,Time Zero Saturation,50 kPa,6 - 20 µm,50-S9,6.5
+5-S10,2,S10,10,SR,Drought Incubation,50 kPa,6 - 20 µm,50-S10,
+5-S11,2,S11,11,SR,Time Zero Saturation,50 kPa,6 - 20 µm,50-S11,6.9
+5-S13,2,S13,13,SR,Field Moisture Incubation,50 kPa,6 - 20 µm,50-S13,10.9
+5-S14,0.4,S14,14,SR,Drought Incubation,50 kPa,6 - 20 µm,50-S14,35.9
+5-S15,2,S15,15,SR,Field Moisture Incubation,50 kPa,6 - 20 µm,50-S15,15
+5-S16,0.15,S16,16,SR,Time Zero Saturation,50 kPa,6 - 20 µm,50-S16,
+5-S17,2,S17,17,SR,Time Zero Saturation,50 kPa,6 - 20 µm,50-S17,7.9
+5-S18,2,S18,18,SR,Saturation Incubation,50 kPa,6 - 20 µm,50-S18,23.7
+5-S19,2,S19,19,SR,Field Moisture Incubation,50 kPa,6 - 20 µm,50-S19,25.9
+5-S21,2,S21,21,SR,Field Moisture Incubation,50 kPa,6 - 20 µm,50-S21,22.4
+5-S23,0.3,S23,23,SR,Time Zero Saturation,50 kPa,6 - 20 µm,50-S23,7.8
+5-S24,2,S24,24,SR,Saturation Incubation,50 kPa,6 - 20 µm,50-S24,20
+5-S25,2,S25,25,SR,Drought Incubation,50 kPa,6 - 20 µm,50-S25,12.1
