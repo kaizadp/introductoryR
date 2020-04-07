@@ -1,0 +1,77 @@
+---
+title: "ggplot_example"
+author: "Kaizad Patel"
+date: "4/6/2020"
+output: github_document
+---
+
+```{r include=TRUE, echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo=FALSE,message=FALSE,warning=FALSE,
+                      collapse = TRUE,
+                      comment = "#>" #, fig.path = "images/"
+                      )
+
+library(Rmisc)
+library(ggplot2)
+library(agricolae)
+
+```
+
+Try to recreate these graphs using the `wsoc_processed.csv` file.  
+The code is in `3b-ggplot_example.Rmd` if needed.
+
+**Figure 1. WSOC in the three different sites, for four different treatments, in two different suctions**  
+brewer color palette (default) used
+```{r fig1, fig.width = 8, fig.height = 5}
+processed = read.csv("processed/wsoc_processed.csv")
+levels(processed$Treatment) = c("Drought", "FM","Saturation", "TZero")
+
+
+processed_summary = summarySE(processed, measurevar = "wsoc_mg_L",
+                              groupvars = c("Site","Treatment","Suction"),
+                              na.rm=TRUE)
+
+ggplot(processed_summary,
+       aes(x = Treatment, y = wsoc_mg_L, fill = Treatment))+
+  geom_bar(stat = "identity", color = "black", width = 0.7, position = position_dodge())+
+  geom_errorbar(aes(ymin = wsoc_mg_L-se, ymax = wsoc_mg_L+se),
+                width = 0.2)+
+  ylab("WSOC, mg/L")+
+  scale_fill_brewer()+
+  facet_grid(Suction~Site)
+```
+
+**Figure 2. How do the moisture treatments affect CPCRW porewaters?**
+
+```{r}
+levels(processed$Treatment) = c("Drought", "FM", "Saturation", "TZero")
+cpcrw = processed[processed$Site=="CPCRW",]
+cpcrw_summary = summarySE(cpcrw, measurevar = "wsoc_mg_L", groupvars = c("Treatment", "Suction"), na.rm = TRUE) 
+
+aov_50kPa = aov(data = cpcrw[cpcrw$Suction=="50 kPa",], wsoc_mg_L ~ Treatment)
+hsd_50kPa = HSD.test(aov_50kPa,"Treatment")
+aov_1kPa = aov(data = cpcrw[cpcrw$Suction=="1.5 kPa",], wsoc_mg_L ~ Treatment)
+hsd_1kPa = HSD.test(aov_1kPa,"Treatment")
+
+
+ggplot(cpcrw_summary,
+       aes(x = Suction, y = wsoc_mg_L, fill = Treatment))+
+  geom_bar(stat = "identity", color = "black", 
+           position = position_dodge(0.7), width = 0.5)+
+  geom_errorbar(aes(ymin = wsoc_mg_L-se, ymax = wsoc_mg_L+se),
+                position = position_dodge(0.7),
+                width = 0.2)+
+  ylab("WSOC, mg/L")+
+  
+  annotate("text", label = "a", x = 0.74, y = 170)+
+  annotate("text", label = "b", x = 0.92, y = 35)+
+  annotate("text", label = "ab", x = 1.08, y = 75)+
+  annotate("text", label = "ab", x = 1.26, y = 45)+
+  annotate("text", label = "a", x = 1.74, y = 260)+
+  annotate("text", label = "ab", x = 1.92, y = 80)+
+  annotate("text", label = "ab", x = 2.08, y = 100)+
+  annotate("text", label = "b", x = 2.26, y = 50)+
+
+  scale_fill_brewer()
+```
+
