@@ -66,4 +66,33 @@ ggplot(data = iris, aes(x = Petal.Width, y = Petal.Length, color = Species, fill
   ##    currently, fill is governed by the main ggplot function
   geom_smooth(method = "lm") #lm = linear model
 
+# f. bar graphs
+## you need to plot bar graphs using the mean and standard error/standard deviation,
+## not the raw data as in scatterplots
 
+# first, compute the mean
+# use Rmisc package
+# you can also use dplyr/tidyverse -- but that's for later
+library(Rmisc)
+
+iris_species = summarySE(data = iris, 
+                         measurevar = "Petal.Length", # variable you want to plot
+                         groupvars = "Species") # grouping variable
+
+# use this summary dataset to make a bar plot
+# Petal.Length ~ Species, change bar fill by Species
+ggplot(data = iris_species, aes(x = Species, y = Petal.Length, fill = Species))+
+  geom_bar(stat = "identity", color = "black")+ # color = border color
+  geom_errorbar(aes(x = Species, 
+                    ymax = Petal.Length + sd, ymin = Petal.Length - sd),
+                width = 0.5, size = 1, # size = line thickness
+                color = "black") 
+
+# g. summary points graph -- plotting mean and se
+## use the same summary dataset as above
+
+ggplot(data = iris_species, aes(x = Species, y = Petal.Length, color = Species))+
+  geom_point(size=3)+ 
+  geom_errorbar(aes(x = Species, 
+                    ymax = Petal.Length + sd, ymin = Petal.Length - sd),
+                width = 0.5, size = 1) 
