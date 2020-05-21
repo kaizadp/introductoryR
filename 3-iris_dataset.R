@@ -96,3 +96,30 @@ ggplot(data = iris_species, aes(x = Species, y = Petal.Length, color = Species))
   geom_errorbar(aes(x = Species, 
                     ymax = Petal.Length + sd, ymin = Petal.Length - sd),
                 width = 0.5, size = 1) 
+#
+## distributions ----
+
+# h. density plots
+## these plots need only an x axis aes
+ggplot(iris, aes(x = Petal.Length, color = Species, fill = Species))+
+  geom_density(alpha = 0.5)
+
+# i. histogram
+## only x axis aes
+ggplot(iris, aes(x = Petal.Length, color = Species, fill = Species))+
+  geom_histogram(alpha = 0.5, binwidth = 0.2, position = "identity")
+
+# j. box plots
+## both x and y aes
+ggplot(iris, aes(x = Species, y = Petal.Length))+
+  geom_boxplot(fill = "lightblue")
+
+# i. violin plots
+## both x and y aes
+ggplot(iris, aes(x = Species, y = Petal.Length))+
+  geom_violin()+
+  geom_dotplot(binaxis='y', stackdir='center', dotsize = 0.3)
+
+
+
+
