@@ -1,10 +1,10 @@
 # INTRODUCTORY R
 # Kaizad F. Patel
 # ---------------
-# 1. basic statistics
+# 2. basic statistics
 #
 
-# we will import the processed file from script #~
+# we will import the processed file from script #1
 # and run basic ANOVA, LME, etc.
 
 # first, import the file
@@ -17,12 +17,14 @@ tzero = processed[processed$Treatment=="Time Zero Saturation",]
 
 # 1. ANOVA: use function `aov`
 ## 1a. one variable
+# how does site influence WSOC?
 tzero_aov1 = aov(data = tzero, wsoc_mg_L ~ Site)
 # anova summary table, with F and P values
 summary(tzero_aov1)
 print(tzero_aov1)
 
 ## 1b. two variables
+# how do site and suction alter wsoc?
 tzero_aov2 = aov(data = tzero, wsoc_mg_L ~ Site + Suction)
 summary(tzero_aov2)
 
@@ -36,6 +38,14 @@ tzero_aov4 = aov(data = tzero, wsoc_mg_L ~ Site*Suction)
 summary(tzero_aov4)
 
 # _aov3 and _aov4 give the same results
+
+# using data = processed
+# test the effect of site and treatment and suction on wsoc
+
+tzero_aov5 = aov(data = processed, wsoc_mg_L ~ Site*Suction*Treatment)
+summary(tzero_aov5)
+
+plot(tzero_aov5)
 
 # 2. post-hoc TUKEY HSD test
 # you do this after running ANOVA

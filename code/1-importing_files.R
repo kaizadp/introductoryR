@@ -13,9 +13,17 @@
 # you can minimize sections to keep the script neat
 
 
+print("abc") # this command prints text
+
+
 # step 1. importing files of different types ----
 # you can import .csv files without any additional packages
 data_csv = read.csv("data/3soils_wsoc_pore.csv")
+
+# exploratory plot
+plot(data_csv)
+
+
 
 # you need the `readxl` package for .xlsx files
 # first, load the package
@@ -36,10 +44,14 @@ names(data_csv)
 str(data_csv)
 
 # change the format of the columns
-data_csv$Site = as.factor(data_csv$Site)
+data_csv$Site = as.character(data_csv$Site)
+
+data_csv$newcolumn = as.character(data_csv$CoreNo)
+
 data_csv$SampleID = as.character(data_csv$SampleID)
 data_csv$`Water.Soluble.Organic.Carbon..mg.L.` = as.factor(data_csv$`Water.Soluble.Organic.Carbon..mg.L.`)
 
+data_csv$wsoc_mg_L = data_csv$Water.Soluble.Organic.Carbon..mg.L.
 
 # list the first 6 entries of the data table
 head(data_csv)
@@ -58,10 +70,10 @@ data_csv[10,"Site"]
 
 # to call all the entries in a column
 # the space before the comma = all rows are selected
-data_csv[,1]
+data_csv[,"Site"]
 
 # call all entries in the first three columns
-data_csv[,1:3]
+subset = data_csv[,4:10]
 
 # call all columns for the first row
 data_csv[1,]
@@ -69,7 +81,7 @@ data_csv[1,]
 
 #
 # step 3. processing and cleaning up ----
-# make a subset of the first three columns
+# make a subset of the first two columns
 data_sub1 = data_csv[,1:2]
 
 # make a subset by removing the first two columns
@@ -83,6 +95,9 @@ names(data_sub2)[names(data_sub2) == "Pore.Size.Domain"] = "pore_size"
 names(data_sub2)[names(data_sub2) == "Water.Soluble.Organic.Carbon..mg.L."] = "wsoc_mg_L"
 
 #
+# NEW step 4. visualizing the dataset ----
+plot(data_csv)
+
 # step 4. export ----
 write.csv(data_sub2, "processed/wsoc_processed.csv")
 # if you open this file, you will see:
@@ -96,3 +111,4 @@ write.csv(data_sub2, "processed/wsoc_processed.csv", na="", row.names = FALSE)
 
 print("SUCCESS!!!")
 
+write.csv(data_sub1, "processed/datasub1.csv")

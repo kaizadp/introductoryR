@@ -114,7 +114,7 @@ ggplot(iris, aes(x = Petal.Length, color = Species, fill = Species))+
 ggplot(iris, aes(x = Species, y = Petal.Length))+
   geom_boxplot(fill = "lightblue")
 
-# i. violin plots
+# k. violin plots
 ## both x and y aes
 ggplot(iris, aes(x = Species, y = Petal.Length))+
   geom_violin()+
