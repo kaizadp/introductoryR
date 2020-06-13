@@ -47,6 +47,8 @@ Think of it as buying (installing) a bunch of books vs. pulling (loading) only t
 Use this code to load the required packages.  
 ```
 library(PACKAGENAME)
+library(soilpalettes)
+library(palmerpenguins)
 ``` 
 
 *note: you need quotation marks (" ") for `install.packages()`  but not for `library()`.*
