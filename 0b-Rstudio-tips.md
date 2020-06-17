@@ -30,6 +30,9 @@ examples:
 ## SECTION A -----------------
 
 ```
+----
 
+### 3. Troubleshooting your script
+[This](https://twitter.com/effinbirds/status/934926651678486528) is a good resource when trying to fix errors in your code.
 
 
