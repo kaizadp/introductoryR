@@ -35,4 +35,13 @@ examples:
 ### 3. Troubleshooting your script
 [This](https://twitter.com/effinbirds/status/934926651678486528) is a good resource when trying to fix errors in your code.
 
+----
 
+### 4. Keeping track of parentheses and other brackets
+When using code with multiple, nested brackets, you can move the cursor to the close-bracket to find its match. Use this to make sure the brackets are in the right place.
+
+<img align="left" heignt = "400" width = "400" src="images/0-intro/paren-1.png">
+
+<img align="left" heignt = "400" width = "400" src="images/0-intro/paren-2.png">
+
+<img align="left" heignt = "400" width = "400" src="images/0-intro/paren-3.png">
