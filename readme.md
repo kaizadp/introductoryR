@@ -37,3 +37,11 @@ file
     files there.
 
 -----
+
+## tabs {.tabset}
+
+### tab 1
+
+### tab2
+
+## end
