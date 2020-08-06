@@ -85,6 +85,25 @@ data_clean =
                                    `Time Zero Saturation` = "tzero",
                                    `Saturation Incubation` = "saturation"))
 
+## use tidyverse to make plots ----
+library(palmerpenguins)
 
-## Aug-6-2020
-## rproj git demo
+data(package = 'palmerpenguins')
+data("penguins")
+
+## all penguins
+ggplot(penguins, aes(x = island, y = bill_length_mm, color = species))+
+  geom_point()
+
+## only Gentoo
+gentoo = 
+  penguins %>% 
+  filter(species == "Gentoo")
+
+ggplot(gentoo, aes(x = island, y = bill_length_mm, color = species))+
+  geom_point()
+
+penguins %>% 
+  filter(species == "Gentoo") %>% 
+  ggplot(aes(x = island, y = bill_length_mm))+
+  geom_point()
