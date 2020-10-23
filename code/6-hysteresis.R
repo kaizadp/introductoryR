@@ -1,6 +1,21 @@
 # October 2, 2020
 # Basic R stuff with the HYSTERESIS - WSOC DATA
 
+################ # 
+################ # 
+
+## experiment design
+
+## Samples were (a) wet or (b) dried to various moisture levels (sat_level = 5, 35, 50, 75, 100%)
+## Samples were of two textures: (a) SCL = sandy clay loam (soil); (b) SL = sandy loam (soil_sand)
+## FM = field moist samples, ~ 53 % saturation
+
+## WSOC data were collected as non-purgeable organic C (NPOC)
+
+## objective of this exercise: (a) plot data, (b) create summary tables, (c) perform statistical analyses
+
+################ # 
+################ # 
 
 # step 0. load packages ---------------------------------------------------
 library(dplyr)
@@ -9,12 +24,12 @@ library(ggplot2)
 
 # step 1. load files --------------------------------------------------
 corekey = read.csv("data/hysteresis_demo/corekey.csv")
-wsoc_data = read.csv("data/hysteresis_demo/wsoc.csv")
+wsoc_data = read.csv("data/hysteresis_demo/wsoc_results.csv")
+wsoc_weights = read.csv("data/hysteresis_demo/wsoc_weights.csv")
 
-# SCL = sandy clay loam (soil)
-# SL = sandy loam (soil_sand)
+# step 2. clean and process the data --------------------------------------
 
-# clean the corekey
+## 2a. clean the corekey
 names(corekey)
 corekey_clean = 
   corekey %>% #ctrl-shift-m gives you the pipes
@@ -24,21 +39,37 @@ corekey_clean =
 str(corekey_clean)  
 str(wsoc_data)
 
-# join corekey to wsoc_data
+## 2b. process and calculate WSOC normalized to soil weight
+# first, convert WSOC from mg/L to mg/g. do this using data in `wsoc_weights`.
+      ## NPOC mg/L ----> NPOC mg/g
+      ## 
+      ## NPOC mg   *   water mL    *  1L
+      ##     L        WSOC_drywt_g    1000 mL
+
+          ## water includes the water used in extraction (40 mL) as well as the water present in the soil (WSOC_water_g)
+
+# second, join the `corekey` to assign treatments to each core.
+
 wsoc_data2 = 
   wsoc_data %>% 
-  left_join(corekey_clean, by = "Core") %>% 
-  ## npoc is in mg/L, but we need to convert to mg/g soil
+  left_join(wsoc_weights, by = "Core") %>% 
   ## create a new column called npoc_mg_g
-  mutate(npoc_mg_g = npoc_mg_l * 40/(DryWt_g*1000))
-  
-            ## NPOC mg/L ----> NPOC mg/g
-            ## 
-            ## NPOC mg   *   40 mL    *  1L
-            ##     L          DryWt_g    1000 mL
+  mutate(wsoc_mg_g = npoc_mg_l * (40+WSOC_water_g)/(WSOC_drywt_g*1000)) %>% 
+  left_join(corekey_clean, by = "Core")
 
 
 
 
+# step 3. visualization ---------------------------------------------------
 
+wsoc_data2 %>% 
+  ggplot(aes(x = sat_level, y = wsoc_mg_g, color = treatment))+
+  geom_point()+
+  facet_grid(texture ~.)
 
+# step 4. tables ---------------------------------------------------
+
+# step 5. statistics ------------------------------------------------------
+## 4a. ANOVA
+l = lm(npoc_mg_g ~ sat_level*treatment, data = wsoc_data2)
+car::Anova(l, type = "III")
