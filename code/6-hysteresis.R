@@ -34,8 +34,10 @@ names(corekey)
 corekey_clean = 
   corekey %>% #ctrl-shift-m gives you the pipes
   # select only the columns you need
-  select(Core, treatment, texture, sat_level, DryWt_g, Carbon_g) 
-
+  select(Core, treatment, texture, sat_level, DryWt_g, Carbon_g) %>% 
+  # change the `Core` column to character format for easy joining later
+  mutate(Core = as.character(Core))
+  
 str(corekey_clean)  
 str(wsoc_data)
 
@@ -52,13 +54,15 @@ str(wsoc_data)
 
 wsoc_data2 = 
   wsoc_data %>% 
+  mutate(Core = as.character(Core)) %>%   
   left_join(wsoc_weights, by = "Core") %>% 
-  ## create a new column called npoc_mg_g
+  ## create a new column called wsoc_mg_g
   mutate(wsoc_mg_g = npoc_mg_l * (40+WSOC_water_g)/(WSOC_drywt_g*1000)) %>% 
-  left_join(corekey_clean, by = "Core")
-
-
-
+  left_join(corekey_clean, by = "Core") %>% 
+  # select only necessary columns
+  select(Core, treatment, texture, sat_level, wsoc_mg_g) %>% 
+  # set FM = 53% sat_level
+  mutate(sat_level = if_else(treatment=="FM", as.integer(53), sat_level))
 
 # step 3. visualization ---------------------------------------------------
 
@@ -68,6 +72,8 @@ wsoc_data2 %>%
   facet_grid(texture ~.)
 
 # step 4. tables ---------------------------------------------------
+
+
 
 # step 5. statistics ------------------------------------------------------
 ## 4a. ANOVA
