@@ -67,14 +67,16 @@ wsoc_data2 =
 # step 3. visualization ---------------------------------------------------
 theme_set(theme_bw())
 
-wsoc_data2 %>% 
+gg_wsoc = 
+  wsoc_data2 %>% 
   ggplot(aes(x = sat_level, y = wsoc_mg_g, color = treatment))+
   geom_point()+
   facet_grid(texture ~.)
 
 # step 4. tables ---------------------------------------------------
 
-wsoc_data2 %>% 
+wsoc_summarytable = 
+  wsoc_data2 %>% 
   group_by(texture, sat_level, treatment) %>% 
   dplyr::summarise(mean_wsoc_mg_g = mean(wsoc_mg_g),
                    sd_wsoc = sd(wsoc_mg_g),
@@ -85,6 +87,65 @@ wsoc_data2 %>%
   tidyr::spread(treatment, wsoc_mg_g) 
 
 # step 5. statistics ------------------------------------------------------
-## 4a. ANOVA
-l = lm(npoc_mg_g ~ sat_level*treatment, data = wsoc_data2)
+## 5a. overall ANOVA
+l = lm(wsoc_mg_g ~ sat_level*treatment, data = wsoc_data2 %>%  filter(treatment != "FM"))
 car::Anova(l, type = "III")
+
+## 5b. (ANOVA) effect of treatment for individual moisture levels
+## include stats in the wsoc summary table
+fit_anova = function(dat){
+  l = lm(wsoc_mg_g ~ treatment, dat)
+  a = car::Anova(l, type = "III") 
+  broom::tidy(a) %>% 
+    filter(term == "treatment") %>% 
+    dplyr::select(`p.value`) %>% 
+    rename(pvalue = `p.value`)
+}
+
+wsoc_pvalues = 
+  wsoc_data2 %>%  filter(treatment != "FM") %>% 
+  group_by(texture, sat_level) %>% 
+  do(fit_anova(.)) %>% 
+  mutate(asterisk = case_when(pvalue <= 0.05 ~ "*"))
+  
+
+
+wsoc_summarytable %>% 
+  left_join(wsoc_pvalues, by = c("texture", "sat_level")) %>% 
+  mutate(Wetting2 = paste(Wetting, asterisk),
+         Wetting2 = stringr::str_replace_all(Wetting2, "NA", "")) %>% 
+  dplyr::select(-Wetting, -pvalue, -asterisk) %>% 
+  rename(Wetting = Wetting2)
+
+## asterisks denote a significant treatment effect
+
+
+# return to ggplot --------------------------------------------------------
+## now, we add asterisks to the plot we created earlier
+## two ways to do it
+
+##  way  1,  more labor-intensive: use individual annotations for each asterisk
+
+gg_wsoc+
+  annotate("text", label = "*", x = 5, y = 0.45, size  = 7)+
+  annotate("text", label = "*", x = 50, y = 0.25, size  = 7)
+## and so on
+## but this does not work when you have multiple panels, as the annotations will be applied to both the panels
+
+## way 2: use geom_text
+## create a file that contains all the information to create a "text" layer superimposed on the original ggplot
+## we need an x-value (sat_level)
+## we need a y-value, which will be a little greater than the maximum y-value 
+## we need a label (asterisk)
+
+gg_label = 
+  wsoc_data2 %>% 
+  group_by(texture, sat_level) %>% 
+  dplyr::summarise(y = max(wsoc_mg_g) + 0.05) %>% 
+  left_join(wsoc_pvalues, by = c("texture", "sat_level")) %>% 
+  mutate(treatment ="Wetting")
+  
+gg_wsoc+
+  geom_text(data = gg_label, aes(y = y, label = asterisk), color= "black", size = 7)+
+  labs(title = "Water extractable organic carbon",
+       subtitle = "asterisks denote significant treatment differences")
