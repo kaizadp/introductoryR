@@ -65,6 +65,7 @@ wsoc_data2 =
   mutate(sat_level = if_else(treatment=="FM", as.integer(53), sat_level))
 
 # step 3. visualization ---------------------------------------------------
+theme_set(theme_bw())
 
 wsoc_data2 %>% 
   ggplot(aes(x = sat_level, y = wsoc_mg_g, color = treatment))+
@@ -73,7 +74,15 @@ wsoc_data2 %>%
 
 # step 4. tables ---------------------------------------------------
 
-
+wsoc_data2 %>% 
+  group_by(texture, sat_level, treatment) %>% 
+  dplyr::summarise(mean_wsoc_mg_g = mean(wsoc_mg_g),
+                   sd_wsoc = sd(wsoc_mg_g),
+                   se_wsoc = sd_wsoc/sqrt(n())) %>% 
+  mutate(wsoc_mg_g = paste(round(mean_wsoc_mg_g,3), "\u00b1", round(se_wsoc, 4))) %>% 
+  dplyr::select(texture, sat_level, treatment, wsoc_mg_g) %>% 
+  filter(treatment != "FM") %>% 
+  tidyr::spread(treatment, wsoc_mg_g) 
 
 # step 5. statistics ------------------------------------------------------
 ## 4a. ANOVA
