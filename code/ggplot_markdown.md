@@ -33,7 +33,7 @@ str(penguins)
 
 ## Elements of a `ggplot` graph:
 
-1.  [foundation](#foundation)
+1.  [foundation](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-1-set-up-the-basic-foundation-plot)
 2.  [`geoms`](#geoms)
 3.  [formatting `geom`s](#formatting)
 4.  [color and shape scales](#scales)
