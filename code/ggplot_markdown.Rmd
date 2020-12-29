@@ -110,7 +110,7 @@ str(penguins)
 
 ----
 
-## Elements of a `ggplot` graph: {#toc}
+## Part A: Elements of a `ggplot` graph: {#toc}
 
 1. [foundation](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-1-set-up-the-basic-foundation-plot)
 1. [geometries](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-2-add-geoms)
@@ -119,6 +119,16 @@ str(penguins)
 1. [formatting axes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-5-formatting-axes)
 1. [labels and annotations](#labs)
 1. [themes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-6-themes)
+1. facets and panels
+
+## Part B: Detailed exploration of some plot types
+
+- scatterplots
+- bar plots
+
+
+## Part C: combining multiple plots
+
 
 ---
 
