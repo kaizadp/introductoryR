@@ -45,7 +45,7 @@ str(penguins)
 
 ### Step 1: set up the basic foundation plot
 
-[*back to top*](#toc)
+[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
 
 Specify (a) the dataset being used and (b) the mapping (x and y axes)
 
