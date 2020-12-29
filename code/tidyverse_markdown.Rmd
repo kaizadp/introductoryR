@@ -1,0 +1,243 @@
+---
+title: "tidyverse"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+
+The `{tidyverse}` is a nice alternative to many base R functions for data cleaning and visualization.
+`{tidyverse}` is a set of eight packages that perform different functions.
+
+1. ggplot2
+1. tibble
+1. tidyr
+1. readr
+1. dplyr
+1. purr
+1. stringr
+1. forcats
+
+```{r}
+library(tidyverse)
+```
+
+---
+
+We will use the `{dplyr}` built-in dataset `starwars`
+
+<details>
+  <summary>click here to explore the `starwars` dataset</summary>
+
+```{r}
+names(starwars)
+skimr::skim(starwars)
+
+```
+
+</details>
+
+---
+
+---
+
+### A `{dplyr}` example (without pipes)
+Consider this multi-part example: 
+
+From the `starwars` dataset, you want to choose only characters with black hair. 
+
+```{r}
+sw_blackhair = filter(starwars, hair_color == "black")
+sw_blackhair$name
+names(sw_blackhair)
+```
+
+You then want to keep only columns related to name, height, and hair color
+
+```{r}
+sw_blackhair2 = select(sw_blackhair, name, height, hair_color)
+names(sw_blackhair2)
+```
+
+You then want to rename the `hair_color` column
+
+```{r}
+sw_blackhair3 = rename(sw_blackhair2, "HairColor" = "hair_color")
+names(sw_blackhair3)
+```
+
+
+In this example above, we created multiple files to get to our final desired output. An easier way to do this is using the **pipe** (%>%).
+
+```{r}
+sw2 = starwars %>% 
+  filter(hair_color == "black") %>% 
+  select(name, height, hair_color) %>% 
+  rename("HairColor" = "hair_color")
+
+names(sw2)
+str(sw2)
+```
+
+---
+
+---
+
+# `{dplyr}` functions - the basics
+
+## rename
+
+```{r}
+starwars %>% 
+  rename("NAME" = "name") %>% 
+  names()
+
+starwars %>% 
+  rename("NAME" = "name",
+         "HEIGHT" = "height",
+         "MASS" = "mass") %>% 
+  names()
+```
+
+## select
+
+These functions allow you to subset a dataset.
+
+Use `select` to subset certain columns. You can do this multiple ways:
+
+- choosing column names
+
+```{r, eval=FALSE}
+starwars %>% 
+  select(name, height, mass) %>% 
+  head()
+```
+
+- choosing column positions
+```{r, eval=FALSE}
+starwars %>% 
+  select(1:3) %>% 
+  head()
+```
+
+- deselecting column names/positions
+```{r}
+starwars %>% 
+  select(-(4:14)) %>% 
+  head()
+```
+
+
+
+## filter
+
+Use `filter` to subset rows where certain conditions are met. 
+
+For example, filter only characters with black hair 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black") %>% 
+  head()
+```
+
+#### multiple conditions 
+
+For example, keep only characters with black or blond hair 
+```{r}
+starwars %>% 
+  filter(hair_color %in% c("black", "blond")) %>% 
+  head()
+```
+  
+
+#### and/or conditions (multiple variables)
+For example, keep only characters with black hair and blue eyes 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black" & eye_color == "blue") %>% 
+  head()
+```
+
+keep only characters with black hair *or* blue eyes 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black" | eye_color == "blue") %>% 
+  head()
+```
+
+#### "not" conditions
+
+keep only characters without black hair 
+```{r, eval=FALSE}
+starwars %>% 
+  filter(hair_color != "black") %>% 
+  head()
+```
+
+another notation for this is 
+```{r}
+starwars %>% 
+  filter(!hair_color == "black") %>% 
+  head()
+```
+
+
+## mutate
+
+### create a new column
+### modify an existing column
+
+
+## summarize
+
+## group_by
+group operations
+
+
+## recode
+
+## arrange
+
+## drop_na
+
+
+# `{dplyr}` functions - next level
+
+## distinct
+
+## starts_with and ends_with
+
+## string contains
+
+## join
+
+## bind_rows and bind_columns
+
+## if_else
+
+## case_when
+
+## pull
+
+
+
+---
+
+<details>
+  <summary>Session Info</summary>
+
+Date Run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>
