@@ -22,11 +22,11 @@ You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.gith
 
 ![repo](images/readme/repo_layout.png)
 
-1\. Click on the green `Fork` button in the top right corner. This will duplicate the repository in your own profile.
-1. In your own `introductoryR` repository (in your profile), click on the green `Code` button.
-2\. Select `Open with GitHub Desktop`.   
-3\. Set the location on your local computer, which will mirror the online repository.   
-4\. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
+1. Click on the  `Fork` button in the top right corner. This will duplicate the repository in your own profile.  
+1. In your own `introductoryR` repository (in your profile), click on the green `Code` button.  
+2. Select `Open with GitHub Desktop`.   
+3. Set the location on your local computer, which will mirror the online repository.   
+4. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
 
 *to download the entire repository without GitHub:*  
 Download all the R scripts and files and use as you wish.
