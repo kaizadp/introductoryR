@@ -14,7 +14,7 @@ As you load files, they show up in the `Environment`.
 ----
 
 ## Installing packages
-<img align="right" height = "400" width = "400" src="images/install_package.png">
+<img align="right"  width = "400" src="images/install_package.png">
 
 ### from CRAN  
 #### OPTION 1: search the CRAN database  
