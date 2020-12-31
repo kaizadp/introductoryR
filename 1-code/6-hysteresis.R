@@ -81,7 +81,10 @@ wsoc_summarytable =
   dplyr::summarise(mean_wsoc_mg_g = mean(wsoc_mg_g),
                    sd_wsoc = sd(wsoc_mg_g),
                    se_wsoc = sd_wsoc/sqrt(n())) %>% 
-  mutate(wsoc_mg_g = paste(round(mean_wsoc_mg_g,3), "\u00b1", round(se_wsoc, 4))) %>% 
+  mutate(mean_wsoc_mg_g = round(mean_wsoc_mg_g,3),
+         se_wsoc = round(se_wsoc,4)) %>% 
+  mutate(wsoc_mg_g = paste(mean_wsoc_mg_g, "\u00b1", se_wsoc)) %>%
+#  mutate(core_assignment = paste0(texture, "-" ,sat_level, "-", treatment))
   dplyr::select(texture, sat_level, treatment, wsoc_mg_g) %>% 
   filter(treatment != "FM") %>% 
   tidyr::spread(treatment, wsoc_mg_g) 

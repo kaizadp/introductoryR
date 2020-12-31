@@ -49,6 +49,14 @@ iris %>%
 
 ![](markdown_demo_files/figure-gfm/iris_plot-1.png)<!-- -->
 
+``` r
+iris %>% 
+  ggplot(aes(x = Species, y = `Sepal.Length`))+
+  geom_point(size = 4)
+```
+
+![](markdown_demo_files/figure-gfm/iris_plot-2.png)<!-- -->
+
 Note that the `echo = FALSE` parameter was added to the code chunk to
 prevent printing of the R code that generated the plot.
 
