@@ -1,7 +1,7 @@
 - operations, functions, and packages
 
 ## The RStudio layout
-<img align="left" heignt = "800" width = "1000" src="images/0-intro/rstudio_layout.png">
+<img align="left" heignt = "800" width = "1000" src="images/rstudio_layout.png">
 
 R-script files are loaded in the top left panel.  
 To run a line of code, move the cursor to the line and (a) click `Run` or (b) use `cmd+return` (Mac) or `ctrl+enter` (PC).  
@@ -14,7 +14,7 @@ As you load files, they show up in the `Environment`.
 ----
 
 ## Installing packages
-<img align="right" heignt = "400" width = "400" src="images/0-intro/install_package.png">
+<img align="right" height = "400" width = "400" src="images/install_package.png">
 
 ### from CRAN  
 #### OPTION 1: search the CRAN database  
