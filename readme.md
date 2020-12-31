@@ -18,7 +18,7 @@ to run R.
 
 ## Using this repository  
 
-*to download/fork the entire repository with GitHub Desktop (recommended):*  
+#### to download/fork the entire repository with GitHub Desktop (recommended):
 You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.github.com). 
 
 ![repo](images/readme/repo_layout.png)
@@ -29,13 +29,13 @@ You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.gith
 3. Set the location on your local computer, which will mirror the online repository.   
 4. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
 
-*to download the entire repository without GitHub:*  
+#### to download the entire repository without GitHub:
 Download all the R scripts and files and use as you wish.
 
 1\. click on `Clone or download`  
 2\. select `Download ZIP`
 
-*to download an individual file:*  
+#### to download an individual file:
 1\. click on the file  
 2\. right-click on `Raw`  
 3\. select the `Save/Download Linked File As ...` option to save the file
@@ -49,7 +49,7 @@ Download all the R scripts and files and use as you wish.
 
 ## Navigating this repository  
 
-`0-before-you-begin.md`, `0b-Rstudio-tips.md`: This files contain useful tips and tricks for using R/RStudio.
+`0-before-you-begin.md`, `0b-Rstudio-tips.md`: These files contain useful tips and tricks for using R/RStudio.
 
 `1-code/`: This directory contains R scripts and RMarkdown/Markdown files.
 
