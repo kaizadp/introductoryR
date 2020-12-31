@@ -20,7 +20,7 @@ to run R.
 *to download/fork the entire repository with GitHub Desktop (recommended):*  
 You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.github.com). 
 
-<img align="left" heignt = "400" width = "400" src="images/readme/repo_layout.png">
+[]("images/readme/repo_layout.png")
 
 1\. Click on the green `Fork` button in the top right corner. This will duplicate the repository in your own profile.
 1. In your own `introductoryR` repository (in your profile), click on the green `Code` button.
