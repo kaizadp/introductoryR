@@ -1,0 +1,33 @@
+---
+title: "tidyverse -- useful commands"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The Tidyverse is a set of eight packages used for data processing, analysis, and visualization:
+   1. ggplot2: data visualization (**g**rammar of **g**raphics)
+   2. tibble: work with *tibbles*, a type of dataframe
+   3. tidyr: clean (tidy) data 
+   4. readr: read/import different file types
+   5. dplyr: clean and process data
+   6. purr
+   7. stringr: work with character strings
+   8. forcats: work with categorical variables
+
+
+## pipes: %>% 
+The pipe (originally from `magrittr` package) is a useful tool in the `dplyr` toolkit that allows you to combine multiple commands into a single line
+
+
+## rename
+## select
+## filter
+## recode
+## mutate
+## summarize
+## group_by
+## join
+
