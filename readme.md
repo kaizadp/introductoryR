@@ -15,6 +15,7 @@ Download *both* programs, we will use RStudio as a User Interface (UI)
 to run R.
 
 -----
+
 ## Using this repository  
 
 *to download/fork the entire repository with GitHub Desktop (recommended):*  
@@ -45,3 +46,18 @@ Download all the R scripts and files and use as you wish.
     files there.
 
 -----
+
+## Navigating this repository  
+
+`0-before-you-begin`: Contains useful tips and tricks for using R/RStudio
+
+`1-code`: Contains R scripts and RMarkdown/Markdown files
+
+`2-data`: Contains data files used in some of the scripts
+
+
+**Issues**: You can find useful links and resources here. You can also use this section to leave suggestions for tutorials/scripts you would like to see in the near future. 
+
+-----
+
+Last updated: 2020-12-30
