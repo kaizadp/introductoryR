@@ -49,11 +49,11 @@ Download all the R scripts and files and use as you wish.
 
 ## Navigating this repository  
 
-`0-before-you-begin`: Contains useful tips and tricks for using R/RStudio
+`0-before-you-begin.md`, `0b-Rstudio-tips.md`: This files contain useful tips and tricks for using R/RStudio.
 
-`1-code`: Contains R scripts and RMarkdown/Markdown files
+`1-code/`: This directory contains R scripts and RMarkdown/Markdown files.
 
-`2-data`: Contains data files used in some of the scripts
+`2-data/`: This directory contains data files used in some of the scripts.
 
 
 **Issues**: You can find useful links and resources here. You can also use this section to leave suggestions for tutorials/scripts you would like to see in the near future. 
