@@ -390,7 +390,7 @@ group operations
 
 <summary>Session Info</summary>
 
-Date Run: 2020-12-28
+Date Run: 2021-01-02
 
 ``` r
 sessionInfo()
