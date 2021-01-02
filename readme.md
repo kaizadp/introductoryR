@@ -23,22 +23,22 @@ You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.gith
 
 ![repo](images/readme/repo_layout.png)
 
-1. Click on the  `Fork` button in the top right corner. This will duplicate the repository in your own profile.  
+1. Click on the `Fork` button in the top right corner. This will duplicate the repository in your own profile.
 1. In your own `introductoryR` repository (in your profile), click on the green `Code` button.  
-2. Select `Open with GitHub Desktop`.   
-3. Set the location on your local computer, which will mirror the online repository.   
-4. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
+1. Select `Open with GitHub Desktop`.   
+1. Set the location on your local computer, which will mirror the online repository.
+1. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
 
 #### to download the entire repository without GitHub:
 Download all the R scripts and files and use as you wish.
 
-1\. click on `Clone or download`  
-2\. select `Download ZIP`
+1\. Click on `Clone or download`  
+2\. Select `Download ZIP`
 
 #### to download an individual file:
-1\. click on the file  
-2\. right-click on `Raw`  
-3\. select the `Save/Download Linked File As ...` option to save the file
+1\. Click on the file  
+2\. Right-click on `Raw`  
+3\. Select the `Save/Download Linked File As ...` option to save the file
 
   - save all the files in one location and maintain the directory
     structure (e.g. `data` and `processed` directories)  
@@ -49,15 +49,16 @@ Download all the R scripts and files and use as you wish.
 
 ## Navigating this repository  
 
-`0-before-you-begin.md`, `0b-Rstudio-tips.md`: These files contain useful tips and tricks for using R/RStudio.
+`0-before-you-begin/`: This directory contains useful tips and tricks for using R/RStudio.
 
 `1-code/`: This directory contains R scripts and RMarkdown/Markdown files.
 
 `2-data/`: This directory contains data files used in some of the scripts.
 
+`3-practice/`: This directory contains practice files. Use files with the .md extension (markdown) to view the rendered reports. Files with the .Rmd extension are RMarkdown files, which contain the source code for their respective .md reports.
 
 **Issues**: You can find useful links and resources here. You can also use this section to leave suggestions for tutorials/scripts you would like to see in the near future. 
 
 -----
 
-Last updated: 2020-12-30
+Last updated: 2021-01-02
