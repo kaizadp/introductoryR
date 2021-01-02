@@ -106,7 +106,7 @@ penguins_summary =
                    depth_sd = sd(bill_depth_mm, na.rm = TRUE),
                    #length_se = sd(bill_length_mm, na.rm = TRUE)/sqrt(n()),
                    #depth_se = sd(bill_depth_mm, na.rm = TRUE)/sqrt(n())
-                   ) %>% 
+  ) %>% 
   left_join(penguins, by = "species")
 
 
@@ -124,7 +124,7 @@ gg_penguins1 +
                     x = length_mean,
                     color = species),
                 width = 0.8, size = 1) +
-  annotate("text", label = "error bars = mean ± standard error", x = 52, y = 12, size = 3)
+  annotate("text", label = "error bars = mean ± standard deviation", x = 52, y = 12, size = 3)
 ```
 
 </details>
@@ -189,7 +189,7 @@ gg_bigmac_turkey =
   
   # set the horizontal line first, as that will go under all the other geoms
   geom_hline(yintercept = 0, linetype = "longdash", alpha = 0.4)+
-
+  
   geom_path(color = "darkred", size = 1)+
   geom_point(aes(shape = valued), color = "darkred", size = 3, stroke = 1, fill = "white") + 
   scale_shape_manual(values = c(21, 16))+
@@ -255,6 +255,90 @@ gg_bigmac_all =
 
 -----
 
+## Broadway Musicals
+
+Source:
+[TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-04-28)
+
+load data file here
+
+``` r
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+```
+
+![](1-ggplot_practice_files/figure-gfm/broadway-1.png)<!-- -->
+
+<details>
+
+<summary>Need a hint? Click here</summary>
+
+  - This may look intimidating, but this is just a fancy-looking
+    `geom_point`.
+  - Data are provided as weekly gross, you need to calculate the total
+    gross per show, i.e. `group_by(show) %>% summarize(...)`
+  - Then you choose the top 4 highest shows, using the `top_n()`
+    function.
+  - Create a label and then use `geom_text`
+
+</details>
+
+<details>
+
+<summary>Need the code? Click here</summary>
+
+``` r
+# first, process the data
+# gross values are in terms of weekly gross, we need to calculate total gross per show
+total_grossing = 
+  grosses %>% 
+  group_by(show) %>% 
+  dplyr::summarise(total_gross = sum(weekly_gross)) %>% 
+  arrange(total_gross) %>% 
+  # filter only the top 4
+  top_n(4, total_gross) %>%
+  # we want to report the gross in terms of billion dollars
+  # then create a `label` column that includes the show name and the total gross in $B
+  mutate(total_gross_mill = total_gross/1000000,
+         total_gross_bill = total_gross_mill/1000,
+         total_gross_bill = round(total_gross_bill,1),
+         label = paste0(show, ", $", total_gross_bill, " B"))
+
+# now make the plot
+total_grossing %>% 
+  ggplot()+
+  
+  # make the segment first, so that goes to the back
+  geom_segment(aes(x = 1.18, xend = 1, 
+                   y = total_gross_bill, yend = total_gross_bill),
+               color = "grey30", linetype = "longdash", alpha = 0.5)+  
+  
+  # because we want all the circles lined vertically, set x = constant value, e.g. 1
+  geom_point(aes(x = 1, y = total_gross_bill, size = total_gross_bill), 
+             alpha = 0.6, shape = 21, fill = "darkred", color = "darkred", stroke = 1.5)+
+  
+  # geom_text will add text labels to the plot, it works the same way as other geoms
+  geom_text(aes(x = 1.19, y = total_gross_bill, label = label), hjust = 0, size = 4)+
+  
+  
+  labs(title = "Highest Grossing Broadway Shows",
+       subtitle = "#TidyTuesday | Source: Playbill")+
+  
+  xlim(0.9, 1.5)+
+  ylim(0.6, 2.0)+
+
+  scale_size(range = c(2, 70))+
+
+  # set and customize theme 
+  theme_void()+
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5, size = 8))
+```
+
+</details>
+
+-----
+
 <details>
 
 <summary>Session Info</summary>
@@ -284,18 +368,18 @@ Date last run: 2021-01-02
     ## [10] palmerpenguins_0.1.0
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] Rcpp_1.0.5       cellranger_1.1.0 pillar_1.4.6     compiler_4.0.2  
-    ##  [5] dbplyr_1.4.4     tools_4.0.2      digest_0.6.25    lubridate_1.7.9 
-    ##  [9] jsonlite_1.7.0   evaluate_0.14    lifecycle_0.2.0  gtable_0.3.0    
-    ## [13] pkgconfig_2.0.3  rlang_0.4.7      reprex_0.3.0     cli_2.0.2       
-    ## [17] DBI_1.1.0        rstudioapi_0.11  yaml_2.2.1       haven_2.3.1     
-    ## [21] xfun_0.16        withr_2.2.0      xml2_1.3.2       httr_1.4.2      
-    ## [25] knitr_1.29       fs_1.5.0         hms_0.5.3        generics_0.0.2  
-    ## [29] vctrs_0.3.2      grid_4.0.2       tidyselect_1.1.0 glue_1.4.1      
-    ## [33] R6_2.4.1         fansi_0.4.1      readxl_1.3.1     rmarkdown_2.3   
-    ## [37] modelr_0.1.8     blob_1.2.1       magrittr_1.5     backports_1.1.8 
-    ## [41] scales_1.1.1     ellipsis_0.3.1   htmltools_0.5.0  rvest_0.3.6     
-    ## [45] assertthat_0.2.1 colorspace_1.4-1 stringi_1.4.6    munsell_0.5.0   
-    ## [49] broom_0.7.0      crayon_1.3.4
+    ##  [1] tidyselect_1.1.0 xfun_0.16        haven_2.3.1      colorspace_1.4-1
+    ##  [5] vctrs_0.3.2      generics_0.0.2   htmltools_0.5.0  yaml_2.2.1      
+    ##  [9] blob_1.2.1       rlang_0.4.7      pillar_1.4.6     glue_1.4.1      
+    ## [13] withr_2.2.0      DBI_1.1.0        dbplyr_1.4.4     modelr_0.1.8    
+    ## [17] readxl_1.3.1     lifecycle_0.2.0  munsell_0.5.0    gtable_0.3.0    
+    ## [21] cellranger_1.1.0 rvest_0.3.6      codetools_0.2-16 evaluate_0.14   
+    ## [25] knitr_1.29       curl_4.3         fansi_0.4.1      broom_0.7.0     
+    ## [29] Rcpp_1.0.5       scales_1.1.1     backports_1.1.8  jsonlite_1.7.0  
+    ## [33] fs_1.5.0         hms_0.5.3        digest_0.6.25    stringi_1.4.6   
+    ## [37] grid_4.0.2       cli_2.0.2        tools_4.0.2      magrittr_1.5    
+    ## [41] crayon_1.3.4     pkgconfig_2.0.3  ellipsis_0.3.1   xml2_1.3.2      
+    ## [45] reprex_0.3.0     lubridate_1.7.9  assertthat_0.2.1 rmarkdown_2.3   
+    ## [49] httr_1.4.2       rstudioapi_0.11  R6_2.4.1         compiler_4.0.2
 
 </details>
