@@ -345,7 +345,7 @@ total_grossing %>%
 
 **Kaizad F. Patel**
 
-Date last run: 2021-01-02
+Date last run: 2021-01-04
 
     ## R version 4.0.2 (2020-06-22)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)

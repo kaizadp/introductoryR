@@ -448,7 +448,7 @@ total_grossing %>%
   ylim(0.6, 2.0)+
   #scale_y_log10()+
   #geom_point(color = "darkred")+
-  scale_size(range = c(2, 70))+
+  scale_size(range = c(30, 70))+
   #scale_size_area(max_size = 100)+
   theme_void()+
   theme(legend.position = "none",
