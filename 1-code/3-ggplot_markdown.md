@@ -579,7 +579,201 @@ The default is `theme_gray()`. Here are the available options.
 You can use `theme()` to customize other features of the plot, such as
 font size, font color, plot color, legend position, etc. \[coming soon\]
 
+`element_blank()`
+
+`element_text()`
+
+`element_rect()`
+
+``` r
+p = ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+``` r
+p + theme(axis.title = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+
+``` r
+p + theme(axis.title.x = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+
+``` r
+p + theme(axis.text = element_text(size = 12, color = "red"))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+
+##### removing gridlines
+
+``` r
+p + theme(panel.grid = element_blank())
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+
+``` r
+p + theme(panel.grid.major = element_blank())
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-47-2.png)<!-- -->
+
+##### setting panel border
+
+``` r
+p + theme(panel.border = element_rect(size = 2))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+
+##### setting panel background
+
+``` r
+p + theme(panel.background = element_rect(fill = "yellow"))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+
+##### adjusting title, subtitle
+
+``` r
+p + labs(title = "Palmer Penguins", subtitle = "flipper length vs. body mass") +
+  theme(plot.title = element_text(size = 22),
+        plot.subtitle = element_text(size = 14, color = "darkred", family = "Georgia"))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+
+### Step 7: facets and panels
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species, scales = "free_x")
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~species)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-53-1.png)<!-- -->
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(.~species)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-54-1.png)<!-- -->
+
+``` r
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~.)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-55-1.png)<!-- -->
+
 # —-
+
+### Scatter plots
+
+``` r
+ggplot(penguins, aes(x = species, y = body_mass_g, color = sex))+
+  geom_point()
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-56-1.png)<!-- -->
+
+``` r
+library(dplyr)
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_point(position = position_dodge(width = 0.3))
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-57-1.png)<!-- -->
+
+``` r
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_point(position = position_jitter())
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-58-1.png)<!-- -->
+
+``` r
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_jitter()
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-58-2.png)<!-- -->
+
+-----
+
+## combining multiple ggplot objects
+
+``` r
+p1 = ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()
+
+p2 = ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm))+
+  geom_point()
+```
+
+``` r
+library(patchwork)
+p1 + p2
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-60-1.png)<!-- -->
+
+``` r
+p1 / p2
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-60-2.png)<!-- -->
+
+``` r
+library(cowplot)
+
+plot_grid(p1, p2)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-61-1.png)<!-- -->
+
+``` r
+plot_grid(p1, p2, nrow = 2)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-61-2.png)<!-- -->
+
+``` r
+library(ggpubr)
+
+ggarrange(p1, p2)
+```
+
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-62-1.png)<!-- -->
 
 # —-
 
@@ -590,21 +784,21 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_smooth()
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-63-1.png)<!-- -->
 
 ``` r
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_smooth(method = "lm")
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-64-1.png)<!-- -->
 
 ``` r
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
 
 ### violin plots
 
@@ -613,7 +807,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_violin()
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-66-1.png)<!-- -->
 
 ### boxplots
 
@@ -622,7 +816,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   geom_boxplot()
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-67-1.png)<!-- -->
 
 ### bar plots
 
@@ -644,7 +838,7 @@ ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_
   geom_bar(stat = "identity")
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-69-1.png)<!-- -->
 
 ``` r
 ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_mm)) +
@@ -652,7 +846,7 @@ ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_
   geom_errorbar(aes(ymin = mean_flipper_length_mm - sd, ymax = mean_flipper_length_mm + sd))
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-70-1.png)<!-- -->
 
 ### distribution curves
 
@@ -661,21 +855,21 @@ ggplot(penguins, aes(x = body_mass_g)) +
   geom_density()
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-71-1.png)<!-- -->
 
 ``` r
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram()
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-72-1.png)<!-- -->
 
 ``` r
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram(binwidth = 100)
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-53-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-73-1.png)<!-- -->
 
 ### combining geoms
 
@@ -685,7 +879,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-54-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-74-1.png)<!-- -->
 
 ### stacked barplots
 
@@ -700,4 +894,4 @@ ggplot(penguins_count, aes(x = island, y = count))+
   geom_bar(stat = "identity", aes(fill = species))
 ```
 
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-56-1.png)<!-- -->
+![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-76-1.png)<!-- -->
