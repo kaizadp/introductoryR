@@ -546,9 +546,159 @@ cowplot::plot_grid(bw, classic, dark, gray, light, linedraw, minimal, void,
 You can use `theme()` to customize other features of the plot, such as font size, font color, plot color, legend position, etc. 
 [coming soon]
 
+`element_blank()`
+
+`element_text()`
+
+`element_rect()`
+
+
+
+```{r}
+p = ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+
+```{r}
+p + theme(axis.title = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+```{r}
+p + theme(axis.title.x = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+```{r}
+p + theme(axis.text = element_text(size = 12, color = "red"))
+```
+
+
+##### removing gridlines
+```{r}
+p + theme(panel.grid = element_blank())
+p + theme(panel.grid.major = element_blank())
+```
+
+##### setting panel border
+```{r}
+p + theme(panel.border = element_rect(size = 2))
+```
+
+
+##### setting panel background
+```{r}
+p + theme(panel.background = element_rect(fill = "yellow"))
+```
+
+
+##### adjusting title, subtitle
+```{r}
+p + labs(title = "Palmer Penguins", subtitle = "flipper length vs. body mass") +
+  theme(plot.title = element_text(size = 22),
+        plot.subtitle = element_text(size = 14, color = "darkred", family = "Georgia"))
+```
+
+
+
+### Step 7: facets and panels
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species, scales = "free_x")
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(.~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~.)
+```
 
 
 # ----
+
+
+### Scatter plots
+
+```{r}
+ggplot(penguins, aes(x = species, y = body_mass_g, color = sex))+
+  geom_point()
+```
+
+```{r}
+library(dplyr)
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_point(position = position_dodge(width = 0.3))
+```
+
+```{r}
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_point(position = position_jitter())
+
+ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
+  geom_jitter()
+```
+
+
+
+---
+
+
+
+## combining multiple ggplot objects
+
+```{r}
+p1 = ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()
+
+p2 = ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm))+
+  geom_point()
+```
+
+```{r}
+library(patchwork)
+p1 + p2
+
+p1 / p2
+```
+
+```{r}
+library(cowplot)
+
+plot_grid(p1, p2)
+
+plot_grid(p1, p2, nrow = 2)
+```
+
+```{r}
+library(ggpubr)
+
+ggarrange(p1, p2)
+```
+
+
 
 # ----
 
