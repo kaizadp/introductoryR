@@ -1,0 +1,195 @@
+---
+title: "Basic Univariate Statistics"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+This tutorial will walk you through basic statistical tools like ANOVA and LME
+
+---
+
+We will use the `{palmerpenguins}` package for this exercise.
+
+First, load the package.
+```{r}
+library(palmerpenguins)
+str(penguins)
+```
+
+There are NAs scattered throughout the dataset. For easy statistical modeling for this exercise, we clean the dataset by dropping the NAs. (see the tidyverse tutorial for more info on `drop_na()`.)
+
+```{r}
+library(tidyverse)
+penguins_clean = penguins %>% drop_na()
+```
+
+---
+
+## ANOVA (ANalysis Of VAriation)
+
+### ANOVA using `aov()`
+
+`aov()` is available as part of the pre-loaded `{stats}` package. This is useful for ANOVA with one explanatory/independent variable. This **should be avoided when you have two or more explanatory variables**. 
+
+The basic structure for this is:
+```{r, eval=F}
+aov(DEPENDENT_VARIABLE ~ EXPLANATORY_VARIABLE, data = DATAFRAME)
+```
+
+***
+
+**example: does bill length vary by species?**
+
+In this example, we have only one *explanatory variable*, "species" 
+
+```{r}
+a = aov(bill_length_mm ~ species, data = penguins_clean)
+summary(a)
+```
+
+The p-value is used to determine significance.  
+
+By default, we use 0.05 as the threshold (called "alpha level").  
+Because p < 0.05, we say that *bill length varies significantly by species*.
+
+
+***
+
+**example: does bill length vary by species and sex?**
+
+In this example, we have two *explanatory variables*, "species" and "sex".  
+The basic structure remains the same. 
+
+```{r}
+a = aov(bill_length_mm ~ species + sex, data = penguins_clean)
+summary(a)
+```
+
+Because p < 0.05, we say that *bill length varies significantly by species and sex*.
+
+***
+
+**example: how do species and sex interact to influence bill length?**
+
+In the above example, we look at individual effects, i.e. (a) Adelie vs. Chinstrap vs. Gentoo and (b) male vs. female. But what about interactive effects? e.g. A-m vs. A-f vs. C-m vs. C-f, etc.
+
+That is done by using `:` to denote interaction between two terms.
+
+```{r, eval=FALSE}
+a = aov(bill_length_mm ~ species + sex + species:sex, data = penguins)
+```
+
+For convenience, this can be shortened using `*`, which means "a + b + a:b".
+```{r}
+a = aov(bill_length_mm ~ species * sex, data = penguins)
+summary(a)
+```
+
+We see there *isn't* an interactive effect of species and sex.
+
+***
+
+### ANOVA using `car::Anova()`
+
+The `Anova()` function in `the {car}` package is a more reliable tool when working with two or more explanatory variables. You can also use it for single explanatory variables, and it will give similar results to `aov()`.
+
+```{r}
+library(car)
+```
+
+The basic structure for this is:
+```{r, eval=F}
+Anova(lm(DEPENDENT_VARIABLE ~ EXPLANATORY_VARIABLE, data = DATAFRAME), type = TYPE)
+```
+
+`lm()` is a linear model. We first fit a linear model, and then we run an ANOVA.
+
+Read [this](https://www.r-bloggers.com/2011/03/anova-–-type-iiiiii-ss-explained/) for an explanation on ANOVA/sums of squares types.
+
+
+***
+
+**example: does bill length vary by species?**
+
+```{r}
+l = lm(bill_length_mm ~ species, data = penguins_clean)
+a = Anova(l)
+print(a)
+```
+
+**example: does bill length vary by species and island?**
+
+```{r}
+l = lm(bill_length_mm ~ island * sex, data = penguins_clean)
+Anova(l)
+```
+
+
+***
+***
+
+
+## Tukey's HSD (Honestly Significant Difference) Test
+
+The ANOVAs we ran above will tell you if a variable exerted a significant influence on the dependent variable, but will not tell you the relationship among the levels.  
+For instance, we know bill length was influenced by species, but we don't know how Adelie, Chinstrap, and Gentoo compared among themselves. 
+
+To get pairwise differences, we use Tukey's HSD test. This is an example of a "post-hoc" test, because it is performed after the main test (in this case, ANOVA).
+
+
+We will use the `HSD.test()` function in the `{agricolae}` package.
+
+```{r}
+library(agricolae)
+```
+
+To do this, you must first run an ANOVA using `aov()`.  
+*This does not work with `car::Anova()`.*
+
+```{r}
+a = aov(bill_length_mm ~ species + sex, data = penguins)
+h = HSD.test(a, "species")
+h
+```
+
+With a Tukey HSD test, different letters indicate significant differences among the levels.  
+
+In this example, Chinstrap has the greatest bill length, followed by Gentoo, and then Adelie. And all three species are significantly different from the each other.
+
+
+```{r}
+a = aov(bill_length_mm ~ island, data = penguins)
+h = HSD.test(a, "island")
+h
+```
+
+In this example, we tested pairwise differences among islands.  
+Biscoe and Dream were both "a", so we conclude that bill length did not differ significantly between these two islands. But Torgersen is "b", which means bill lengths on Torgersen are significantly smaller than on the other islands.
+
+***
+***
+
+## Linear Mixed Effects Models (LME)
+
+*coming soon*
+
+***
+
+
+--- 
+
+<details>
+  <summary>Session Info</summary>
+  
+  Date Run: `r Sys.Date()`
+  
+```{r, echo = FALSE}
+sessionInfo()
+```
+  
+  
