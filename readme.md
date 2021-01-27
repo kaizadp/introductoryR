@@ -4,6 +4,10 @@ introductoryR
 ================
 Kaizad F. Patel, *soil nerd and R enthusiast*
 
+-----
+
+Jan 27, 2021 update: Check out the repository [Wiki](https://github.com/kaizadp/introductoryR/wiki) to see the tutorials.
+
 
 -----
 
