@@ -110,30 +110,21 @@ str(penguins)
 
 ----
 
-## Part A: Elements of a `ggplot` graph: {#toc}
+## Elements of a `ggplot` graph: <a name = "toc"></a>
 
-1. [foundation](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-1-set-up-the-basic-foundation-plot)
-1. [geometries](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-2-add-geoms)
-1. [formatting geoms](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-3-format-geoms)
+1. [foundation](#foundation)
+1. [geometries](#geoms)
+1. [formatting geoms](#formatting)
 1. [color and shape scales](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-4-scales-for-colors-and-shapes)
 1. [formatting axes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-5-formatting-axes)
 1. [labels and annotations](#labs)
 1. [themes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-6-themes)
 1. facets and panels
 
-## Part B: Detailed exploration of some plot types
-
-- scatterplots
-- bar plots
-
-
-## Part C: combining multiple plots
-
-
 ---
 
-### Step 1: set up the basic foundation plot {#foundation}
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+### Step 1: set up the basic foundation plot <a name = "foundation"></a>
+[*back to top*](#toc)
 
 Specify (a) the dataset being used and (b) the mapping (x and y axes)
 
@@ -153,8 +144,8 @@ ggplot(penguins,
 
 ---
 
-### Step 2: add `geoms` {#geoms}
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+### Step 2: add geoms <a name = "geoms"></a>
+[*back to top*](#toc)
 
 `ggplot2` uses `geom` functions to add layers with different types of data visualization, e.g. points, lines, boxplots, violin plots, etc. Simply add `+` at the end of the foundation line and add new layers as needed.
 
@@ -182,8 +173,8 @@ ggplot(penguins, aes(x = island, y = flipper_length_mm)) +
 
 ---
 
-### Step 3: format `geoms` {#formatting}
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+### Step 3: format `geoms` <a name = "formatting"></a>
+[*back to top*](#toc)
 
 Modify color, shape, size by adding arguments in the `geom_()` parentheses.  
 If you leave the parentheses blank, it will default to `color = "black"`, `shape = 19`, `size = 1.5` for scatterplots
@@ -638,173 +629,3 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
 
 
 # ----
-
-
-### Scatter plots
-
-```{r}
-ggplot(penguins, aes(x = species, y = body_mass_g, color = sex))+
-  geom_point()
-```
-
-```{r}
-library(dplyr)
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_point(position = position_dodge(width = 0.3))
-```
-
-```{r}
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_point(position = position_jitter())
-
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_jitter()
-```
-
-
-
----
-
-
-
-## combining multiple ggplot objects
-
-```{r}
-p1 = ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
-  geom_point()
-
-p2 = ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm))+
-  geom_point()
-```
-
-```{r}
-library(patchwork)
-p1 + p2
-
-p1 / p2
-```
-
-```{r}
-library(cowplot)
-
-plot_grid(p1, p2)
-
-plot_grid(p1, p2, nrow = 2)
-```
-
-```{r}
-library(ggpubr)
-
-ggarrange(p1, p2)
-```
-
-
-
-# ----
-
-
-### line plots and smoothers
-```{r}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth()
-```
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth(method = "lm")
-```
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-
-### violin plots
-```{r}
-ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
-  geom_violin()
-```
-
-
-### boxplots
-```{r}
-ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
-  geom_boxplot()
-```
-
-
-### bar plots
-
-Bar plots are used to represent the mean (and error), so those must be calculated before creating the plot.
-
-```{r}
-library(dplyr)
-penguins_flipperlength_summary = 
-  penguins %>% 
-  group_by(species) %>% 
-  dplyr::summarise(mean_flipper_length_mm = mean(flipper_length_mm, na.rm = TRUE),
-                   sd = sd(flipper_length_mm, na.rm = TRUE),
-                   se = sd/sqrt(n()))
-```
-
-```{r}
-ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_mm)) +
-  geom_bar(stat = "identity")
-```
-
-```{r}
-ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_mm)) +
-  geom_bar(stat = "identity")+
-  geom_errorbar(aes(ymin = mean_flipper_length_mm - sd, ymax = mean_flipper_length_mm + sd))
-```
-
-
-
-### distribution curves
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_density()
-```
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram()
-```
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram(binwidth = 100)
-```
-
-
-### combining geoms
-
-```{r}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-
-
-### stacked barplots
-
-```{r}
-penguins_count = 
-  penguins %>% 
-  mutate(count = 1)
-```
-
-```{r}
-ggplot(penguins_count, aes(x = island, y = count))+
-  geom_bar(stat = "identity", aes(fill = species))
-```
-
-
-
-
-
-
-

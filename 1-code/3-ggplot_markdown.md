@@ -3,7 +3,7 @@ ggplot2 – The grammar of graphics
 
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
 This tutorial uses the `{palmerpenguins}` package, available on CRAN.
 
@@ -13,8 +13,8 @@ library(ggplot2)
 ```
 
 <details>
-
-<summary>click here for a quick exploration of the `penguins` dataset
+<summary>
+click here for a quick exploration of the `penguins` dataset
 </summary>
 
 first, use the `str` function for a quick exploration of columns and
@@ -36,14 +36,13 @@ str(penguins)
 
 </details>
 
------
+------------------------------------------------------------------------
 
-## Part A: Elements of a `ggplot` graph:
+## Elements of a `ggplot` graph: <a name = "toc"></a>
 
-1.  [foundation](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-1-set-up-the-basic-foundation-plot)
-2.  [geometries](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-2-add-geoms)
-3.  [formatting
-    geoms](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-3-format-geoms)
+1.  [foundation](#foundation)
+2.  [geometries](#geoms)
+3.  [formatting geoms](#formatting)
 4.  [color and shape
     scales](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-4-scales-for-colors-and-shapes)
 5.  [formatting
@@ -52,19 +51,11 @@ str(penguins)
 7.  [themes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-6-themes)
 8.  facets and panels
 
-## Part B: Detailed exploration of some plot types
+------------------------------------------------------------------------
 
-  - scatterplots
-  - bar plots
+### Step 1: set up the basic foundation plot <a name = "foundation"></a>
 
-## Part C: combining multiple plots
-
------
-
-### Step 1: set up the basic foundation plot
-
-[*back to
-top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+[*back to top*](#toc)
 
 Specify (a) the dataset being used and (b) the mapping (x and y axes)
 
@@ -85,12 +76,11 @@ ggplot(penguins,
 
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
-### Step 2: add `geoms`
+### Step 2: add geoms <a name = "geoms"></a>
 
-[*back to
-top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+[*back to top*](#toc)
 
 `ggplot2` uses `geom` functions to add layers with different types of
 data visualization, e.g. points, lines, boxplots, violin plots, etc.
@@ -128,17 +118,16 @@ ggplot(penguins, aes(x = island, y = flipper_length_mm)) +
 
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
-### Step 3: format `geoms`
+### Step 3: format `geoms` <a name = "formatting"></a>
 
-[*back to
-top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+[*back to top*](#toc)
 
 Modify color, shape, size by adding arguments in the `geom_()`
 parentheses.  
-If you leave the parentheses blank, it will default to `color =
-"black"`, `shape = 19`, `size = 1.5` for scatterplots
+If you leave the parentheses blank, it will default to
+`color = "black"`, `shape = 19`, `size = 1.5` for scatterplots
 
 #### setting one color/shape for all points
 
@@ -283,9 +272,9 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 Note: if there are contradicting pieces of code, the most recent
 occurrence will override the previous one.
 
-In this example, we want to set color by species (`aes(color =
-species`)), but we also have `geom_point(color = "blue")`, which will
-override the previous color argument.
+In this example, we want to set color by species
+(`aes(color = species`)), but we also have `geom_point(color = "blue")`,
+which will override the previous color argument.
 
 ``` r
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm, aes(color = species))) +
@@ -337,15 +326,16 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
 ### Step 4: scales for colors and shapes
 
 [*back to
 top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
 
-**Note: These `scale_` functions work only if you use the `aes(color =
-...)` or `aes(shape = ...)` functions to group by color/shape.**
+**Note: These `scale_` functions work only if you use the
+`aes(color = ...)` or `aes(shape = ...)` functions to group by
+color/shape.**
 
 #### manual color scales (for categorical variables)
 
@@ -456,7 +446,7 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
------
+------------------------------------------------------------------------
 
 ### Step 5: formatting axes
 
@@ -508,8 +498,9 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-38-1.png)<!-- -->
 
 <details>
-
-<summary>for tips on more complicated axis labels, click here</summary>
+<summary>
+for tips on more complicated axis labels, click here
+</summary>
 
 coming soon. good luck.
 
@@ -558,12 +549,12 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 You can also modify the following aspects of axes, but those must be
 done through `theme()`:
 
-  - font size
-  - font family
-  - bold, italics, etc.
-  - axis margin/spacing
+-   font size
+-   font family
+-   bold, italics, etc.
+-   axis margin/spacing
 
------
+------------------------------------------------------------------------
 
 ### Step 6: themes
 
@@ -696,202 +687,3 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
 ![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-55-1.png)<!-- -->
 
 # —-
-
-### Scatter plots
-
-``` r
-ggplot(penguins, aes(x = species, y = body_mass_g, color = sex))+
-  geom_point()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-56-1.png)<!-- -->
-
-``` r
-library(dplyr)
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_point(position = position_dodge(width = 0.3))
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-57-1.png)<!-- -->
-
-``` r
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_point(position = position_jitter())
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-58-1.png)<!-- -->
-
-``` r
-ggplot(penguins %>% filter(!is.na(sex)), aes(x = species, y = body_mass_g, color = sex))+
-  geom_jitter()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-58-2.png)<!-- -->
-
------
-
-## combining multiple ggplot objects
-
-``` r
-p1 = ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
-  geom_point()
-
-p2 = ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm))+
-  geom_point()
-```
-
-``` r
-library(patchwork)
-p1 + p2
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-60-1.png)<!-- -->
-
-``` r
-p1 / p2
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-60-2.png)<!-- -->
-
-``` r
-library(cowplot)
-
-plot_grid(p1, p2)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-61-1.png)<!-- -->
-
-``` r
-plot_grid(p1, p2, nrow = 2)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-61-2.png)<!-- -->
-
-``` r
-library(ggpubr)
-
-ggarrange(p1, p2)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-62-1.png)<!-- -->
-
-# —-
-
-### line plots and smoothers
-
-``` r
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-63-1.png)<!-- -->
-
-``` r
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth(method = "lm")
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-64-1.png)<!-- -->
-
-``` r
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-65-1.png)<!-- -->
-
-### violin plots
-
-``` r
-ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
-  geom_violin()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-66-1.png)<!-- -->
-
-### boxplots
-
-``` r
-ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
-  geom_boxplot()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-67-1.png)<!-- -->
-
-### bar plots
-
-Bar plots are used to represent the mean (and error), so those must be
-calculated before creating the plot.
-
-``` r
-library(dplyr)
-penguins_flipperlength_summary = 
-  penguins %>% 
-  group_by(species) %>% 
-  dplyr::summarise(mean_flipper_length_mm = mean(flipper_length_mm, na.rm = TRUE),
-                   sd = sd(flipper_length_mm, na.rm = TRUE),
-                   se = sd/sqrt(n()))
-```
-
-``` r
-ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_mm)) +
-  geom_bar(stat = "identity")
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-69-1.png)<!-- -->
-
-``` r
-ggplot(penguins_flipperlength_summary, aes(x = species, y = mean_flipper_length_mm)) +
-  geom_bar(stat = "identity")+
-  geom_errorbar(aes(ymin = mean_flipper_length_mm - sd, ymax = mean_flipper_length_mm + sd))
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-70-1.png)<!-- -->
-
-### distribution curves
-
-``` r
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_density()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-71-1.png)<!-- -->
-
-``` r
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram()
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-72-1.png)<!-- -->
-
-``` r
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram(binwidth = 100)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-73-1.png)<!-- -->
-
-### combining geoms
-
-``` r
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-74-1.png)<!-- -->
-
-### stacked barplots
-
-``` r
-penguins_count = 
-  penguins %>% 
-  mutate(count = 1)
-```
-
-``` r
-ggplot(penguins_count, aes(x = island, y = count))+
-  geom_bar(stat = "identity", aes(fill = species))
-```
-
-![](3-ggplot_markdown_files/figure-gfm/unnamed-chunk-76-1.png)<!-- -->
