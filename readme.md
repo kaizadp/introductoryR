@@ -27,7 +27,7 @@ You will need (a) a GitHub account and (b) [GitHub Desktop](https://desktop.gith
 
 ![repo](images/readme/repo_layout.png)
 
-1. lick on the green `Code` button.  
+1. Click on the green `Code` button.  
 1. Select `Open with GitHub Desktop`.   
 1. Set the location on your local computer, which will mirror the online repository.
 1. To access the most recent edits to the repository, open GitHub Desktop, click on `Fetch Origin` and then `Pull Origin`. Alternatively, select `Git`>`Pull` in the Rproject in RStudio.
