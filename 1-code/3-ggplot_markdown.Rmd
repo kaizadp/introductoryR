@@ -108,22 +108,45 @@ str(penguins)
 
 </details>  
 
-----
+---
 
-## Elements of a `ggplot` graph: <a name = "toc"></a>
+---
+
+<a name = "toc"></a>
+
+## Elements of a `ggplot` graph: 
+
+A {ggplot2} object is created in sequential layers of the foundation, geometries, and annotations
 
 1. [foundation](#foundation)
 1. [geometries](#geoms)
 1. [formatting geoms](#formatting)
-1. [color and shape scales](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-4-scales-for-colors-and-shapes)
-1. [formatting axes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-5-formatting-axes)
+    - [color and shapes](#color_shape)
+    - [colors and shapes by group](#color_shape_group)
+    - [color vs. fill](#fill)
+    - [transparency](#transparency)
+1. [color and shape scales](#color_scales)
+    - [manual color scales](#)
+    - [continuous color scales](#)
+    - [shape scales](#)
+1. [formatting axes](#axes)
+    - [axis limits](#axis_limits)
+    - [axis labels](#axis_labels)
+    - [axis scales](#axis_scales)
 1. [labels and annotations](#labs)
-1. [themes](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#step-6-themes)
-1. facets and panels
+1. [themes](#themes)
+    - [formatting axis titles and text](#axis_text)
+    - [formatting gridlines](#gridlines)
+    - [formatting borders and background](#border)
+    - [formatting titles and captions](#format_title)
 
 ---
 
-### Step 1: set up the basic foundation plot <a name = "foundation"></a>
+---
+
+<a name = "foundation"></a>
+
+## Step 1: set up the basic foundation plot 
 [*back to top*](#toc)
 
 Specify (a) the dataset being used and (b) the mapping (x and y axes)
@@ -142,9 +165,15 @@ ggplot(penguins,
        aes(x = body_mass_g, y = flipper_length_mm))
 ```
 
+This creates the blank panel, on which we plot the geometries.
+
 ---
 
-### Step 2: add geoms <a name = "geoms"></a>
+---
+
+<a name = "geoms"></a>
+
+## Step 2: add geometries 
 [*back to top*](#toc)
 
 `ggplot2` uses `geom` functions to add layers with different types of data visualization, e.g. points, lines, boxplots, violin plots, etc. Simply add `+` at the end of the foundation line and add new layers as needed.
@@ -173,26 +202,31 @@ ggplot(penguins, aes(x = island, y = flipper_length_mm)) +
 
 ---
 
-### Step 3: format `geoms` <a name = "formatting"></a>
+---
+
+<a name = "formatting"></a>
+
+## Step 3: format `geoms` 
 [*back to top*](#toc)
 
-Modify color, shape, size by adding arguments in the `geom_()` parentheses.  
+Modify color, shape, size by adding arguments in the `geom_*()` parentheses.  
 If you leave the parentheses blank, it will default to `color = "black"`, `shape = 19`, `size = 1.5` for scatterplots
 
-#### setting one color/shape for all points
-simply type `color = ...`, etc. arguments in the `geom_()` parentheses. 
+<a name = "color_shape"></a>
 
+#### setting one color/shape for all points
+
+simply type `color = ...`, etc. arguments in the `geom_*()` parentheses. 
 ```{r}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_point(color = "red", shape = 19, size = 2)
 ```
 
-Notes:
-
-1. you can use "color" or "colour"
-1. you can specify colors using the hex code (e.g. #000000) or color names from [this list](http://sape.inf.usi.ch/quick-reference/ggplot2/colour).
-1. you can specify shapes using codes from [this list](http://www.sthda.com/english/wiki/ggplot2-point-shapes).
-
+`stroke = ...` will adjust the thickness of point outline
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(color = "darkred", shape = 21, size = 2, stroke = 1)
+```
 
 for `geom_smooth()` and similar line-based `geoms`, `size = ...` will set the line thickness
 ```{r}
@@ -207,6 +241,18 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 ```
 
 
+Notes:
+
+1. you can use "color" or "colour" spelling
+1. you can specify colors using the hex code (e.g. #000000) or color names from [this list](http://sape.inf.usi.ch/quick-reference/ggplot2/colour).
+1. you can specify shapes using codes from [this list](http://www.sthda.com/english/wiki/ggplot2-point-shapes).
+
+
+
+
+---
+
+<a name = "color_shape_group"></a>
 
 #### setting colors/shapes by group
 
@@ -215,10 +261,13 @@ use `aes(color = GROUPING VARIABLE, shape = GROUPING VARIABLE)` arguments in the
 This example assigns a different color and shape for each island.
 ```{r, fig.height=3, fig.width=4.5}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point(aes(color = island, shape = island))
+  geom_point(aes(color = island, shape = island), size = 2)
 ```
 
-This example assigns a different color and dot size for each island.
+In the example above, `color = ...` and `shape = ...` are in the `aes()`, so each island gets a shape and color. `size = ...` is outside the `aes()`, so all the points are of size 2. 
+
+
+This next example assigns a different color and point size for each island.
 ```{r, fig.height=3, fig.width=4.5}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_point(aes(color = island, size = island))
@@ -238,8 +287,14 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 ```
 
 
+
+---
+
 #### setting colors/shapes for multiple `geoms`
 
+<details>
+  <summary>Some examples -- click to expand</summary>
+  
 You can use the technique above for each `geom`. Use this to customize each `geom` separately.
 ```{r}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
@@ -289,6 +344,12 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm, aes(color = species
   geom_smooth(method = "lm", se = FALSE, aes(group = species), color = "black")
 ```
 
+</details>
+
+
+---
+
+<a name = "fill"></a>
 
 #### *color* vs. *fill*
 
@@ -313,6 +374,11 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 ```
 
 
+
+---
+
+<a name = "transparency"></a>
+
 #### transparency
 Set transparency/opacity for `fill` using `alpha = ...`. `alpha = 0` is transparent and `alpha = 1` is opaque.
 
@@ -326,12 +392,17 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 
 ---
 
-### Step 4: scales for colors and shapes {#scales}
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+---
+
+<a name = "color_scales"></a>
+
+## Step 3b: scales for colors and shapes
+[*back to top*](#toc)
 
 **Note: These `scale_` functions work only if you use the `aes(color = ...)` or `aes(shape = ...)` functions to group by color/shape.**
 
-    
+---
+
 #### manual color scales (for categorical variables)
 
 You can set your own color palettes by using `scale_color_manual()`.  
@@ -342,6 +413,47 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_point(aes(color = species))+
   scale_color_manual(values = c("red", "blue", "yellow"))
 ```
+
+
+
+---
+
+#### gradient color scales (for numeric/continuous variables)
+
+When setting colors for a continuous variable, use `scale_color_gradient*()`.
+
+Use `scale_color_gradient()` for a two-color gradient. You can set the high and low extremes.
+
+```{r, fig.height=3, fig.width=4.5}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = body_mass_g))+
+  scale_color_gradient(low = "red", high = "blue")
+```
+
+<details>
+  <summary>types of gradient scales</summary>
+
+Use `scale_color_gradient2()` for a diverging color gradient. You can set the high and low extremes as well as the midpoint and midpoint color.
+
+```{r, fig.height=3, fig.width=4.5}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = body_mass_g))+
+  scale_color_gradient2(low = "red", high = "blue", mid = "white", midpoint = 4000)
+```
+
+
+Use `scale_color_gradientn()` if you want to use multiple colors in your gradient. You can also use a pre-defined color palette, e.g. `{soilpalettes}`.
+
+```{r, fig.height=3, fig.width=4.5}
+ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = body_mass_g))+
+  scale_color_gradientn(colors = c("blue", "green", "yellow", "orange", "red"))
+```
+
+</details>
+
+<details>
+  <summary>example color palettes</summary>
 
 You can use the [`brewer` color palettes](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/) 
 ```{r, fig.height=3, fig.width=4.5}
@@ -364,42 +476,17 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   scale_color_manual(values = soilpalettes::soil_palette("podzol",3))
 ```
 
-#### gradient color scales (for numeric/continuous variables)
-
-When setting colors for a continuous variable, use `scale_color_gradient*()`.
-
-Use `scale_color_gradient()` for a two-color gradient. You can set the high and low extremes.
-
-```{r, fig.height=3, fig.width=4.5}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point(aes(color = body_mass_g))+
-  scale_color_gradient(low = "red", high = "blue")
-```
-
-
-Use `scale_color_gradient2()` for a diverging color gradient. You can set the high and low extremes as well as the midpoint and midpoint color.
-
-```{r, fig.height=3, fig.width=4.5}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point(aes(color = body_mass_g))+
-  scale_color_gradient2(low = "red", high = "blue", mid = "white", midpoint = 4000)
-```
-
-
-Use `scale_color_gradientn()` if you want to use multiple colors in your gradient. You can also use a pre-defined color palette, e.g. `{soilpalettes}`.
-
-```{r, fig.height=3, fig.width=4.5}
-ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
-  geom_point(aes(color = body_mass_g))+
-  scale_color_gradientn(colors = c("blue", "green", "yellow", "orange", "red"))
-```
-
 ```{r, fig.height=3, fig.width=4.5}
 ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   geom_point(aes(color = body_mass_g))+
   scale_color_gradientn(colors = soilpalettes::soil_palette("podzol", 5))
 ```
 
+</details>
+
+
+
+---
 
 #### scales for shapes 
 Similar to colors, you can set the shapes using `scale_shape_manual()`, using the codes [here](http://www.sthda.com/english/wiki/ggplot2-point-shapes).
@@ -410,12 +497,18 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   scale_shape_manual(values = c(1, 16, 4))
 ```
 
+---
 
- ---
+---
 
+<a name = "axes"></a>
 
-### Step 5: formatting axes {#axes} 
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+## Step 5: formatting axes
+[*back to top*](#toc)
+
+---
+
+<a name = "axis_limits"></a>
 
 #### setting axis limits
 
@@ -437,6 +530,10 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
   scale_x_continuous(limits = c(3000, 5000))+
   scale_y_continuous(limits = c(130, 250))
 ```
+
+---
+
+<a name = "axis_labels"></a>
 
 #### setting axis labels
 
@@ -463,6 +560,10 @@ ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) +
 coming soon. good luck.
 
 </details>  
+
+---
+
+<a name = "axis_scales"></a>
 
 #### axis scales
 You can use `scale_x_*()` and `scale_y_*` to set axis label, limits, major and minor breaks, and axis position
@@ -492,6 +593,15 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
   scale_x_discrete(position = "top")
 ```
 
+<details>
+  <summary> axis transformations </summary>
+  
+coming soon
+
+</details>
+
+
+---
 
 You can also modify the following aspects of axes, but those must be done through `theme()`:
 
@@ -502,8 +612,12 @@ You can also modify the following aspects of axes, but those must be done throug
 
 ---
 
-### Step 6: themes {#theme} 
-[*back to top*](https://github.com/kaizadp/introductoryR/blob/master/code/ggplot_markdown.md#elements-of-a-ggplot-graph)
+---
+
+<a name = "themes"></a>
+
+## Step 6: themes 
+[*back to top*](#toc)
 
 You can use pre-defined themes to change the look of your plots. 
 
@@ -545,12 +659,17 @@ You can use `theme()` to customize other features of the plot, such as font size
 
 
 
+---
+
+<a name = "axis_text"></a>
+
+#### axis titles and text
+
 ```{r}
 p = ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + 
   geom_point() + 
   theme_bw()
 ```
-
 
 ```{r}
 p + theme(axis.title = element_text(face = "bold", 
@@ -568,6 +687,9 @@ p + theme(axis.title.x = element_text(face = "bold",
 p + theme(axis.text = element_text(size = 12, color = "red"))
 ```
 
+---
+
+<a name = "gridlines"></a>
 
 ##### removing gridlines
 ```{r}
@@ -575,17 +697,23 @@ p + theme(panel.grid = element_blank())
 p + theme(panel.grid.major = element_blank())
 ```
 
+---
+
+<a name = "border"></a>
+
 ##### setting panel border
 ```{r}
 p + theme(panel.border = element_rect(size = 2))
 ```
-
 
 ##### setting panel background
 ```{r}
 p + theme(panel.background = element_rect(fill = "yellow"))
 ```
 
+---
+
+<a name = "format_title"></a>
 
 ##### adjusting title, subtitle
 ```{r}
@@ -595,8 +723,11 @@ p + labs(title = "Palmer Penguins", subtitle = "flipper length vs. body mass") +
 ```
 
 
+---
 
-### Step 7: facets and panels
+---
+
+## Step 7: facets and panels
 ```{r}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
   geom_point()+
