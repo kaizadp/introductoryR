@@ -337,6 +337,12 @@ total_grossing %>%
 
 </details>
 
+## Transit Costs
+
+load data file here
+
+![](1-ggplot_practice_files/figure-gfm/transit_graph-1.png)<!-- -->
+
 -----
 
 <details>
@@ -345,7 +351,7 @@ total_grossing %>%
 
 **Kaizad F. Patel**
 
-Date last run: 2021-01-04
+Date last run: 2021-01-22
 
     ## R version 4.0.2 (2020-06-22)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)

@@ -524,6 +524,60 @@ total_grossing %>%
 </details>
 
 
+## Transit Costs
+
+load data file here
+```{r transit_data}
+library(tidyverse)
+transit_cost <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-05/transit_cost.csv')
+```
+
+```{r transit_graph}
+
+transit_cost_longest = 
+  transit_cost %>% 
+  drop_na(country) %>% 
+  top_n(10, length)
+
+
+transit_cost_longest %>% 
+  mutate(length = as.integer(length),
+         line2 = paste0(line, " (", city, ")")) %>% 
+  ggplot(aes(x = reorder(line2, -length), y = length, color = country))+
+  
+  geom_point(size = 10)+
+  geom_segment(aes(xend = reorder(line2, -length), yend = 0), size = 5)+
+  geom_text(aes(label = line2), 
+            hjust = 1, angle = 90, size = 2.5,
+            position = position_nudge(y = -5), color = "white")+
+  geom_text(aes(label = length), 
+            position = position_nudge(y = 15), fontface = "bold")+
+  #scale_color_manual(values = c("blue", "green", "yellow", "orange", "red", "pink", "purple"))+
+  scale_color_viridis_d()+
+  labs(x = "",
+       y = "",
+       #title = "The 10 longest transit lines",
+       #subtitle = "length in km",
+       caption = "source = Transit Costs Project
+       8 January 2021")+
+  annotate("text", label = "The 10 longest transit lines 
+           in the world",
+           x = 10, y = 200, hjust = 1, fontface = "bold", size = 5)+
+  annotate("text", label = "length in km", 
+             angle = 90, x = 0.5, y = 100, size = 3, fontface = "italic")+ 
+  
+    theme_void()+
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    plot.title = element_text(size = 14, face = "bold", hjust = 1),
+    plot.caption = element_text(hjust = 0.5, color = "grey40", size = 8),
+    legend.position = "none")
+
+ggsave("transit.png", width = 5.5, height = 5.5)  
+
+```
+
 ---
 <details>
 <summary>Session Info</summary>
