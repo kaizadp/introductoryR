@@ -1,0 +1,128 @@
+---
+title: "ggplot2 -- working with themes"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+```{r}
+library(palmerpenguins)
+library(ggplot2)
+```
+
+## Step 6: themes 
+[*back to top*](#toc)
+
+You can use pre-defined themes to change the look of your plots. 
+
+The default is `theme_gray()`. Here are the available options.
+
+```{r, echo=FALSE, fig.width=9, fig.height=4.5}
+p = ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + ylim(150, 250) + xlim(3000, 5000)
+
+bw = p+theme_bw()+annotate("text", label = "theme_bw()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+classic = p+theme_classic()+annotate("text", label = "theme_classic()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+dark = p+theme_dark()+annotate("text", label = "theme_dark()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+gray = p+theme_gray()+annotate("text", label = "theme_gray()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+light = p+theme_light()+annotate("text", label = "theme_light()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+linedraw = p+theme_linedraw()+annotate("text", label = "theme_linedraw()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+minimal = void = p+theme_minimal()+annotate("text", label = "theme_minimal()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+void = p+geom_point()+theme_void()+annotate("text", label = "theme_void()", 
+                      x = 3000, y = 220, hjust = "left", vjust = "top", size = 3)
+
+
+cowplot::plot_grid(bw, classic, dark, gray, light, linedraw, minimal, void, 
+                   nrow = 2)
+```
+
+You can use `theme()` to customize other features of the plot, such as font size, font color, plot color, legend position, etc. 
+[coming soon]
+
+`element_blank()`
+
+`element_text()`
+
+`element_rect()`
+
+
+
+---
+
+<a name = "axis_text"></a>
+
+#### axis titles and text
+
+```{r}
+p = ggplot(penguins, aes(x = body_mass_g, y = flipper_length_mm)) + 
+  geom_point() + 
+  theme_bw()
+```
+
+```{r}
+p + theme(axis.title = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+```{r}
+p + theme(axis.title.x = element_text(face = "bold", 
+                                    size = 14, 
+                                    family = "Georgia"))
+```
+
+```{r}
+p + theme(axis.text = element_text(size = 12, color = "red"))
+```
+
+---
+
+<a name = "gridlines"></a>
+
+##### removing gridlines
+```{r}
+p + theme(panel.grid = element_blank())
+p + theme(panel.grid.major = element_blank())
+```
+
+---
+
+<a name = "border"></a>
+
+##### setting panel border
+```{r}
+p + theme(panel.border = element_rect(size = 2))
+```
+
+##### setting panel background
+```{r}
+p + theme(panel.background = element_rect(fill = "yellow"))
+```
+
+---
+
+<a name = "format_title"></a>
+
+##### adjusting title, subtitle
+```{r}
+p + labs(title = "Palmer Penguins", subtitle = "flipper length vs. body mass") +
+  theme(plot.title = element_text(size = 22),
+        plot.subtitle = element_text(size = 14, color = "darkred", family = "Georgia"))
+```
+
+
+---
+
+---
+

@@ -1,0 +1,49 @@
+---
+title: "ggplot2 -- working with facets/panels"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+```{r}
+library(palmerpenguins)
+library(ggplot2)
+```
+
+
+## Step 7: facets and panels
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_wrap(~species, scales = "free_x")
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(.~species)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g))+
+  geom_point()+
+  facet_grid(island~.)
+```
+
