@@ -10,19 +10,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.height = 3, fig.width = 3)
 ```
 
-
-The `{tidyverse}` is a nice alternative to many base R functions for data cleaning and visualization.
-`{tidyverse}` is a set of eight packages that perform different functions.
-
-1. ggplot2
-1. tibble
-1. tidyr
-1. readr
-1. dplyr
-1. purr
-1. stringr
-1. forcats
-
 ```{r}
 library(tidyverse)
 ```
@@ -42,49 +29,6 @@ skimr::skim(starwars)
 
 </details>
 
----
-
----
-
-### A `{dplyr}` example (without pipes)
-Consider this multi-part example: 
-
-From the `starwars` dataset, you want to choose only characters with black hair. 
-
-```{r}
-sw_blackhair = filter(starwars, hair_color == "black")
-sw_blackhair$name
-names(sw_blackhair)
-```
-
-You then want to keep only columns related to name, height, and hair color
-
-```{r}
-sw_blackhair2 = select(sw_blackhair, name, height, hair_color)
-names(sw_blackhair2)
-```
-
-You then want to rename the `hair_color` column
-
-```{r}
-sw_blackhair3 = rename(sw_blackhair2, "HairColor" = "hair_color")
-names(sw_blackhair3)
-```
-
-
-In this example above, we created multiple files to get to our final desired output. An easier way to do this is using the **pipe** (%>%).
-
-```{r}
-sw2 = starwars %>% 
-  filter(hair_color == "black") %>% 
-  select(name, height, hair_color) %>% 
-  rename("HairColor" = "hair_color")
-
-names(sw2)
-str(sw2)
-```
-
----
 
 ---
 
