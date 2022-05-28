@@ -174,14 +174,6 @@ Biscoe and Dream were both "a", so we conclude that bill length did not differ s
 ***
 ***
 
-## Linear Mixed Effects Models (LME)
-
-*coming soon*
-
-***
-
-
---- 
 
 <details>
   <summary>Session Info</summary>
