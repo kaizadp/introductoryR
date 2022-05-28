@@ -1,0 +1,37 @@
+---
+title: "dplyr basics"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+```{r}
+library(tidyverse)
+```
+
+---
+
+
+## join
+
+## bind_rows and bind_columns
+
+
+
+---
+
+<details>
+  <summary>Session Info</summary>
+
+Date Run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>

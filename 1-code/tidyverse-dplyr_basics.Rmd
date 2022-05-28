@@ -1,0 +1,189 @@
+---
+title: "dplyr basics"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+```{r}
+library(tidyverse)
+```
+
+---
+
+We will use the `{dplyr}` built-in dataset `starwars`
+
+<details>
+  <summary>click here to explore the `starwars` dataset</summary>
+
+```{r}
+names(starwars)
+skimr::skim(starwars)
+
+```
+
+</details>
+
+
+---
+
+# `{dplyr}` functions - the basics
+
+## rename
+
+Use this to rename columns.  
+
+general format: `rename(dataframe, "NEW_COLUMN_NAME" = "OLD_COLUMN_NAME")`
+
+You can rename multiple columns in the same command.
+
+```{r}
+starwars_rn = rename(starwars, "NAME" = "name")
+names(starwars_rn)
+
+starwars_rn2 = rename(starwars, 
+                      "NAME" = "name",
+                      "HEIGHT" = "height",
+                      "MASS" = "mass")
+names(starwars_rn2)
+```
+
+
+
+
+```{r}
+starwars %>% 
+  rename("NAME" = "name") %>% 
+  names()
+
+starwars %>% 
+  rename("NAME" = "name",
+         "HEIGHT" = "height",
+         "MASS" = "mass") %>% 
+  names()
+```
+
+## select
+
+Use this to subset certain columns. 
+
+general format: `select()
+
+You can do this multiple ways:
+
+- choosing column names
+
+```{r, eval=FALSE}
+starwars %>% 
+  select(name, height, mass) %>% 
+  head()
+```
+
+- choosing column positions
+```{r, eval=FALSE}
+starwars %>% 
+  select(1:3) %>% 
+  head()
+```
+
+- deselecting column names/positions
+```{r}
+starwars %>% 
+  select(-(4:14)) %>% 
+  head()
+```
+
+
+
+## filter
+
+Use `filter` to subset rows where certain conditions are met. 
+
+For example, filter only characters with black hair 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black") %>% 
+  head()
+```
+
+#### multiple conditions 
+
+For example, keep only characters with black or blond hair 
+```{r}
+starwars %>% 
+  filter(hair_color %in% c("black", "blond")) %>% 
+  head()
+```
+  
+
+#### and/or conditions (multiple variables)
+For example, keep only characters with black hair and blue eyes 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black" & eye_color == "blue") %>% 
+  head()
+```
+
+keep only characters with black hair *or* blue eyes 
+
+```{r}
+starwars %>% 
+  filter(hair_color == "black" | eye_color == "blue") %>% 
+  head()
+```
+
+#### "not" conditions
+
+keep only characters without black hair 
+```{r, eval=FALSE}
+starwars %>% 
+  filter(hair_color != "black") %>% 
+  head()
+```
+
+another notation for this is 
+```{r}
+starwars %>% 
+  filter(!hair_color == "black") %>% 
+  head()
+```
+
+
+## mutate
+
+### create a new column
+### modify an existing column
+
+
+## summarize
+
+## group_by
+group operations
+
+
+## recode
+
+## arrange
+
+## drop_na
+
+
+---
+
+<details>
+  <summary>Session Info</summary>
+
+Date Run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>

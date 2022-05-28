@@ -1,0 +1,48 @@
+---
+title: "dplyr basics"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.height = 3, fig.width = 3)
+```
+
+```{r}
+library(tidyverse)
+```
+
+---
+
+
+# `{dplyr}` functions - next level
+
+
+## distinct
+
+## separate
+
+## starts_with and ends_with
+
+## if_else
+
+## case_when
+
+## pull
+
+## recode
+
+---
+
+<details>
+  <summary>Session Info</summary>
+
+Date Run: `r Sys.Date()`
+
+```{r}
+sessionInfo()
+```
+
+</details>
