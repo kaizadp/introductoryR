@@ -155,10 +155,47 @@ starwars %>%
   head()
 ```
 
+> **_NOTE:_**   
+Note the symbols:  
+== to meet a condition (for character variables only)  
+| for "or" conditions  
+! for "not"
+
+
 
 ## mutate
 
+Use the `mutate()` function to either create new columns or modify existing columns.  
+Basic usage is provided here, more advanced options are covered [here] and [here].
+
+
 ### create a new column
+
+
+example: duplicating an existing column
+```{r}
+starwars %>% 
+  dplyr::select(name) %>% 
+  mutate(name2 = name) %>% 
+  head() 
+```
+
+
+example: combining two columns
+```{r}
+starwars %>% 
+  dplyr::select(name, gender) %>% 
+  mutate(name_gen = paste(name, "-", gender)) %>% 
+  head() 
+```
+
+Here, we use the `paste()` function to combine two columns and a hyphen.  
+There are two versions of the `paste()` function:
+- `paste()`: combines the pieces and adds a space between them
+- `paste0()`: combines the pieces without adding a space
+
+ 
+
 ### modify an existing column
 
 
@@ -168,7 +205,6 @@ starwars %>%
 group operations
 
 
-## recode
 
 ## arrange
 

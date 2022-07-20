@@ -284,9 +284,64 @@ starwars %>%
     ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
+> ***NOTE:***  
+> Note the symbols:  
+> == to meet a condition (for character variables only)  
+> \| for “or” conditions  
+> ! for “not”
+
 ## mutate
 
+Use the `mutate()` function to either create new columns or modify
+existing columns.  
+Basic usage is provided here, more advanced options are covered \[here\]
+and \[here\].
+
 ### create a new column
+
+example: duplicating an existing column
+
+``` r
+starwars %>% 
+  dplyr::select(name) %>% 
+  mutate(name2 = name) %>% 
+  head() 
+```
+
+    ## # A tibble: 6 × 2
+    ##   name           name2         
+    ##   <chr>          <chr>         
+    ## 1 Luke Skywalker Luke Skywalker
+    ## 2 C-3PO          C-3PO         
+    ## 3 R2-D2          R2-D2         
+    ## 4 Darth Vader    Darth Vader   
+    ## 5 Leia Organa    Leia Organa   
+    ## 6 Owen Lars      Owen Lars
+
+example: combining two columns
+
+``` r
+starwars %>% 
+  dplyr::select(name, gender) %>% 
+  mutate(name_gen = paste(name, "-", gender)) %>% 
+  head() 
+```
+
+    ## # A tibble: 6 × 3
+    ##   name           gender    name_gen                  
+    ##   <chr>          <chr>     <chr>                     
+    ## 1 Luke Skywalker masculine Luke Skywalker - masculine
+    ## 2 C-3PO          masculine C-3PO - masculine         
+    ## 3 R2-D2          masculine R2-D2 - masculine         
+    ## 4 Darth Vader    masculine Darth Vader - masculine   
+    ## 5 Leia Organa    feminine  Leia Organa - feminine    
+    ## 6 Owen Lars      masculine Owen Lars - masculine
+
+Here, we use the `paste()` function to combine two columns and a
+hyphen.  
+There are two versions of the `paste()` function: - `paste()`: combines
+the pieces and adds a space betweeen them - `paste0()`: combines the
+pieces without adding a space
 
 ### modify an existing column
 
@@ -295,8 +350,6 @@ starwars %>%
 ## group\_by
 
 group operations
-
-## recode
 
 ## arrange
 
