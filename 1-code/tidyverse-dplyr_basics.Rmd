@@ -34,7 +34,9 @@ skimr::skim(starwars)
 
 # `{dplyr}` functions - the basics
 
-## rename
+---
+
+## 1. rename
 
 Use this to rename columns.  
 
@@ -68,11 +70,14 @@ starwars %>%
   names()
 ```
 
-## select
+
+---
+
+## 2. select
 
 Use this to subset certain columns. 
 
-general format: `select()
+general format: `select()`
 
 You can do this multiple ways:
 
@@ -100,9 +105,14 @@ starwars %>%
 
 
 
-## filter
+
+---
+
+## 3. filter
 
 Use `filter` to subset rows where certain conditions are met. 
+
+#### 3.1. single condition 
 
 For example, filter only characters with black hair 
 
@@ -112,7 +122,7 @@ starwars %>%
   head()
 ```
 
-#### multiple conditions 
+#### 3.2. multiple conditions 
 
 For example, keep only characters with black or blond hair 
 ```{r}
@@ -122,7 +132,7 @@ starwars %>%
 ```
   
 
-#### and/or conditions (multiple variables)
+#### 3.3. and/or conditions (multiple variables)
 For example, keep only characters with black hair and blue eyes 
 
 ```{r}
@@ -139,7 +149,7 @@ starwars %>%
   head()
 ```
 
-#### "not" conditions
+#### 3.4. "not" conditions
 
 keep only characters without black hair 
 ```{r, eval=FALSE}
@@ -162,14 +172,36 @@ Note the symbols:
 ! for "not"
 
 
+#### 3.5. `%in%` vs. `==`
 
-## mutate
+By default, when using `==` or `!=`, the `filter()` command will also drop all NA values - even if we want to retain those rows.  
+Therefore, a better alternative is to use `%in%`, as described above.
+
+Examples:
+
+Keep black hair color
+```{r, eval = F}
+starwars %>% 
+  filter(hair_color %in% c("black")) %>% 
+  head()
+```
+
+Remove black hair color
+```{r, eval = F}
+starwars %>% 
+  filter(!hair_color %in% c("black")) %>% 
+  head()
+```
+
+---
+
+## 4. mutate
 
 Use the `mutate()` function to either create new columns or modify existing columns.  
 Basic usage is provided here, more advanced options are covered [here] and [here].
 
 
-### create a new column
+### 4.1. create a new column
 
 
 example: duplicating an existing column
@@ -189,19 +221,45 @@ starwars %>%
   head() 
 ```
 
-Here, we use the `paste()` function to combine two columns and a hyphen.  
-There are two versions of the `paste()` function:
-- `paste()`: combines the pieces and adds a space between them
+> Here, we use the `paste()` function to combine two columns and a hyphen.  
+There are two versions of the `paste()` function:  
+- `paste()`: combines the pieces and adds a space between them  
 - `paste0()`: combines the pieces without adding a space
 
  
 
-### modify an existing column
+### 4.2. modify an existing column
 
+Sometimes, you want to modify an existing column without creating a new column
 
-## summarize
+Example: `height` is currently listed in cm, and we want to change this to m.
 
-## group_by
+```{r}
+starwars %>% 
+#  dplyr::select(height) %>% 
+  mutate(height = height/100) %>% 
+  head() 
+```
+
+> **NOTE #1: Be very wary** when modifying an existing column, as it is very easy to make a mistake and not catch it.  
+Try this example, what does it do? What happens if you run this same line of code two times?
+```{r, eval = F}
+starwars = starwars %>% dplyr::select(height) %>% mutate(height = height/100)
+```
+
+> **NOTE #2: UNITS.** Always include units in the column name, so there is no confusion about the data. The columns in the `starwars` do not include units (sigh), so we need to look up the [package/dataset info online](https://dplyr.tidyverse.org/reference/starwars.html) to fully understand the data. NOT IDEAL. Always, always, always include units.
+
+Some other examples where you can use `mutate` to modify an existing column:
+
+- changing the column type: `mutate(x = as.numeric(x))`, `mutate(y = as.character(y))`
+- changing the order levels for a factor column: `mutate(x = factor(x, levels = c(X, Y, Z)))`
+- rounding a numeric column to a certain number of decimal places: `mutate(x = round(x, 2))`
+
+---
+
+## 5. summarize
+
+## 6. group_by
 group operations
 
 

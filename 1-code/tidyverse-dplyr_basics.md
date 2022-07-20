@@ -43,32 +43,32 @@ Data summary
 
 **Variable type: character**
 
-| skim\_variable | n\_missing | complete\_rate | min | max | empty | n\_unique | whitespace |
-|:---------------|-----------:|---------------:|----:|----:|------:|----------:|-----------:|
-| name           |          0 |           1.00 |   3 |  21 |     0 |        87 |          0 |
-| hair\_color    |          5 |           0.94 |   4 |  13 |     0 |        12 |          0 |
-| skin\_color    |          0 |           1.00 |   3 |  19 |     0 |        31 |          0 |
-| eye\_color     |          0 |           1.00 |   3 |  13 |     0 |        15 |          0 |
-| sex            |          4 |           0.95 |   4 |  14 |     0 |         4 |          0 |
-| gender         |          4 |           0.95 |   8 |   9 |     0 |         2 |          0 |
-| homeworld      |         10 |           0.89 |   4 |  14 |     0 |        48 |          0 |
-| species        |          4 |           0.95 |   3 |  14 |     0 |        37 |          0 |
+| skim_variable | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
+|:--------------|----------:|--------------:|----:|----:|------:|---------:|-----------:|
+| name          |         0 |          1.00 |   3 |  21 |     0 |       87 |          0 |
+| hair_color    |         5 |          0.94 |   4 |  13 |     0 |       12 |          0 |
+| skin_color    |         0 |          1.00 |   3 |  19 |     0 |       31 |          0 |
+| eye_color     |         0 |          1.00 |   3 |  13 |     0 |       15 |          0 |
+| sex           |         4 |          0.95 |   4 |  14 |     0 |        4 |          0 |
+| gender        |         4 |          0.95 |   8 |   9 |     0 |        2 |          0 |
+| homeworld     |        10 |          0.89 |   4 |  14 |     0 |       48 |          0 |
+| species       |         4 |          0.95 |   3 |  14 |     0 |       37 |          0 |
 
 **Variable type: list**
 
-| skim\_variable | n\_missing | complete\_rate | n\_unique | min\_length | max\_length |
-|:---------------|-----------:|---------------:|----------:|------------:|------------:|
-| films          |          0 |              1 |        24 |           1 |           7 |
-| vehicles       |          0 |              1 |        11 |           0 |           2 |
-| starships      |          0 |              1 |        17 |           0 |           5 |
+| skim_variable | n_missing | complete_rate | n_unique | min_length | max_length |
+|:--------------|----------:|--------------:|---------:|-----------:|-----------:|
+| films         |         0 |             1 |       24 |          1 |          7 |
+| vehicles      |         0 |             1 |       11 |          0 |          2 |
+| starships     |         0 |             1 |       17 |          0 |          5 |
 
 **Variable type: numeric**
 
-| skim\_variable | n\_missing | complete\_rate |   mean |     sd |  p0 |   p25 | p50 |   p75 | p100 | hist  |
-|:---------------|-----------:|---------------:|-------:|-------:|----:|------:|----:|------:|-----:|:------|
-| height         |          6 |           0.93 | 174.36 |  34.77 |  66 | 167.0 | 180 | 191.0 |  264 | ▁▁▇▅▁ |
-| mass           |         28 |           0.68 |  97.31 | 169.46 |  15 |  55.6 |  79 |  84.5 | 1358 | ▇▁▁▁▁ |
-| birth\_year    |         44 |           0.49 |  87.57 | 154.69 |   8 |  35.0 |  52 |  72.0 |  896 | ▇▁▁▁▁ |
+| skim_variable | n_missing | complete_rate |   mean |     sd |  p0 |   p25 | p50 |   p75 | p100 | hist  |
+|:--------------|----------:|--------------:|-------:|-------:|----:|------:|----:|------:|-----:|:------|
+| height        |         6 |          0.93 | 174.36 |  34.77 |  66 | 167.0 | 180 | 191.0 |  264 | ▁▁▇▅▁ |
+| mass          |        28 |          0.68 |  97.31 | 169.46 |  15 |  55.6 |  79 |  84.5 | 1358 | ▇▁▁▁▁ |
+| birth_year    |        44 |          0.49 |  87.57 | 154.69 |   8 |  35.0 |  52 |  72.0 |  896 | ▇▁▁▁▁ |
 
 </details>
 
@@ -76,7 +76,9 @@ Data summary
 
 # `{dplyr}` functions - the basics
 
-## rename
+------------------------------------------------------------------------
+
+## 1. rename
 
 Use this to rename columns.
 
@@ -128,11 +130,13 @@ starwars %>%
     ##  [6] "eye_color"  "birth_year" "sex"        "gender"     "homeworld" 
     ## [11] "species"    "films"      "vehicles"   "starships"
 
-## select
+------------------------------------------------------------------------
+
+## 2. select
 
 Use this to subset certain columns.
 
-general format: \`select()
+general format: `select()`
 
 You can do this multiple ways:
 
@@ -170,9 +174,13 @@ starwars %>%
     ## 5 Leia Organa       150    49
     ## 6 Owen Lars         178   120
 
-## filter
+------------------------------------------------------------------------
+
+## 3. filter
 
 Use `filter` to subset rows where certain conditions are met.
+
+#### 3.1. single condition
 
 For example, filter only characters with black hair
 
@@ -183,18 +191,18 @@ starwars %>%
 ```
 
     ## # A tibble: 6 × 14
-    ##   name     height  mass hair_color skin_color eye_color birth_year sex    gender
-    ##   <chr>     <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr>  <chr> 
-    ## 1 Biggs D…    183  84   black      light      brown           24   male   mascu…
-    ## 2 Boba Fe…    183  78.2 black      fair       brown           31.5 male   mascu…
-    ## 3 Lando C…    177  79   black      dark       brown           31   male   mascu…
-    ## 4 Watto       137  NA   black      blue, grey yellow          NA   male   mascu…
-    ## 5 Quarsh …    183  NA   black      dark       brown           62   <NA>   <NA>  
-    ## 6 Shmi Sk…    163  NA   black      fair       brown           72   female femin…
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Biggs Da…    183  84   black      light      brown           24   male  mascu…
+    ## 2 Boba Fett    183  78.2 black      fair       brown           31.5 male  mascu…
+    ## 3 Lando Ca…    177  79   black      dark       brown           31   male  mascu…
+    ## 4 Watto        137  NA   black      blue, grey yellow          NA   male  mascu…
+    ## 5 Quarsh P…    183  NA   black      dark       brown           62   <NA>  <NA>  
+    ## 6 Shmi Sky…    163  NA   black      fair       brown           72   fema… femin…
     ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
-#### multiple conditions
+#### 3.2. multiple conditions
 
 For example, keep only characters with black or blond hair
 
@@ -216,7 +224,7 @@ starwars %>%
     ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
-#### and/or conditions (multiple variables)
+#### 3.3. and/or conditions (multiple variables)
 
 For example, keep only characters with black hair and blue eyes
 
@@ -243,18 +251,18 @@ starwars %>%
 ```
 
     ## # A tibble: 6 × 14
-    ##   name     height  mass hair_color  skin_color eye_color birth_year sex   gender
-    ##   <chr>     <int> <dbl> <chr>       <chr>      <chr>          <dbl> <chr> <chr> 
-    ## 1 Luke Sk…    172    77 blond       fair       blue            19   male  mascu…
-    ## 2 Owen La…    178   120 brown, grey light      blue            52   male  mascu…
-    ## 3 Beru Wh…    165    75 brown       light      blue            47   fema… femin…
-    ## 4 Biggs D…    183    84 black       light      brown           24   male  mascu…
-    ## 5 Anakin …    188    84 blond       fair       blue            41.9 male  mascu…
-    ## 6 Wilhuff…    180    NA auburn, gr… fair       blue            64   male  mascu…
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
+    ## 2 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
+    ## 3 Beru Whi…    165    75 brown      light      blue            47   fema… femin…
+    ## 4 Biggs Da…    183    84 black      light      brown           24   male  mascu…
+    ## 5 Anakin S…    188    84 blond      fair       blue            41.9 male  mascu…
+    ## 6 Wilhuff …    180    NA auburn, g… fair       blue            64   male  mascu…
     ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
-#### “not” conditions
+#### 3.4. “not” conditions
 
 keep only characters without black hair
 
@@ -273,14 +281,14 @@ starwars %>%
 ```
 
     ## # A tibble: 6 × 14
-    ##   name     height  mass hair_color  skin_color eye_color birth_year sex   gender
-    ##   <chr>     <int> <dbl> <chr>       <chr>      <chr>          <dbl> <chr> <chr> 
-    ## 1 Luke Sk…    172    77 blond       fair       blue            19   male  mascu…
-    ## 2 Darth V…    202   136 none        white      yellow          41.9 male  mascu…
-    ## 3 Leia Or…    150    49 brown       light      brown           19   fema… femin…
-    ## 4 Owen La…    178   120 brown, grey light      blue            52   male  mascu…
-    ## 5 Beru Wh…    165    75 brown       light      blue            47   fema… femin…
-    ## 6 Obi-Wan…    182    77 auburn, wh… fair       blue-gray       57   male  mascu…
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Luke Sky…    172    77 blond      fair       blue            19   male  mascu…
+    ## 2 Darth Va…    202   136 none       white      yellow          41.9 male  mascu…
+    ## 3 Leia Org…    150    49 brown      light      brown           19   fema… femin…
+    ## 4 Owen Lars    178   120 brown, gr… light      blue            52   male  mascu…
+    ## 5 Beru Whi…    165    75 brown      light      blue            47   fema… femin…
+    ## 6 Obi-Wan …    182    77 auburn, w… fair       blue-gray       57   male  mascu…
     ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
     ## #   vehicles <list>, starships <list>
 
@@ -290,14 +298,40 @@ starwars %>%
 > \| for “or” conditions  
 > ! for “not”
 
-## mutate
+#### 3.5. `%in%` vs. `==`
+
+By default, when using `==` or `!=`, the `filter()` command will also
+drop all NA values - even if we want to retain those rows.  
+Therefore, a better alternative is to use `%in%`, as described above.
+
+Examples:
+
+Keep black hair color
+
+``` r
+starwars %>% 
+  filter(hair_color %in% c("black")) %>% 
+  head()
+```
+
+Remove black hair color
+
+``` r
+starwars %>% 
+  filter(!hair_color %in% c("black")) %>% 
+  head()
+```
+
+------------------------------------------------------------------------
+
+## 4. mutate
 
 Use the `mutate()` function to either create new columns or modify
 existing columns.  
 Basic usage is provided here, more advanced options are covered \[here\]
 and \[here\].
 
-### create a new column
+### 4.1. create a new column
 
 example: duplicating an existing column
 
@@ -337,23 +371,75 @@ starwars %>%
     ## 5 Leia Organa    feminine  Leia Organa - feminine    
     ## 6 Owen Lars      masculine Owen Lars - masculine
 
-Here, we use the `paste()` function to combine two columns and a
-hyphen.  
-There are two versions of the `paste()` function: - `paste()`: combines
-the pieces and adds a space betweeen them - `paste0()`: combines the
-pieces without adding a space
+> Here, we use the `paste()` function to combine two columns and a
+> hyphen.  
+> There are two versions of the `paste()` function:  
+> - `paste()`: combines the pieces and adds a space between them  
+> - `paste0()`: combines the pieces without adding a space
 
-### modify an existing column
+### 4.2. modify an existing column
 
-## summarize
+Sometimes, you want to modify an existing column without creating a new
+column
 
-## group\_by
+Example: `height` is currently listed in cm, and we want to change this
+to m.
+
+``` r
+starwars %>% 
+#  dplyr::select(height) %>% 
+  mutate(height = height/100) %>% 
+  head() 
+```
+
+    ## # A tibble: 6 × 14
+    ##   name      height  mass hair_color skin_color eye_color birth_year sex   gender
+    ##   <chr>      <dbl> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr> 
+    ## 1 Luke Sky…   1.72    77 blond      fair       blue            19   male  mascu…
+    ## 2 C-3PO       1.67    75 <NA>       gold       yellow         112   none  mascu…
+    ## 3 R2-D2       0.96    32 <NA>       white, bl… red             33   none  mascu…
+    ## 4 Darth Va…   2.02   136 none       white      yellow          41.9 male  mascu…
+    ## 5 Leia Org…   1.5     49 brown      light      brown           19   fema… femin…
+    ## 6 Owen Lars   1.78   120 brown, gr… light      blue            52   male  mascu…
+    ## # … with 5 more variables: homeworld <chr>, species <chr>, films <list>,
+    ## #   vehicles <list>, starships <list>
+
+> **NOTE \#1: Be very wary** when modifying an existing column, as it is
+> very easy to make a mistake and not catch it.  
+> Try this example, what does it do? What happens if you run this same
+> line of code two times?
+
+``` r
+starwars = starwars %>% dplyr::select(height) %>% mutate(height = height/100)
+```
+
+> **NOTE \#2: UNITS.** Always include units in the column name, so there
+> is no confusion about the data. The columns in the `starwars` do not
+> include units (sigh), so we need to look up the [package/dataset info
+> online](https://dplyr.tidyverse.org/reference/starwars.html) to fully
+> understand the data. NOT IDEAL. Always, always, always include units.
+
+Some other examples where you can use `mutate` to modify an existing
+column:
+
+-   changing the column type: `mutate(x = as.numeric(x))`,
+    `mutate(y = as.character(y))`
+-   changing the order levels for a factor column:
+    `mutate(x = factor(x, levels = c(X, Y, Z)))`
+-   rounding a numeric column to a certain number of decimal places:
+    `mutate(x = round(x, 2))`
+
+------------------------------------------------------------------------
+
+## 5. summarize
+
+## 6. group_by
 
 group operations
 
 ## arrange
 
-## drop\_na
+## drop_na
 
 ------------------------------------------------------------------------
 
@@ -362,7 +448,7 @@ group operations
 Session Info
 </summary>
 
-Date Run: 2022-05-27
+Date Run: 2022-07-20
 
 ``` r
 sessionInfo()
@@ -384,14 +470,14 @@ sessionInfo()
     ## 
     ## other attached packages:
     ## [1] forcats_0.5.1   stringr_1.4.0   dplyr_1.0.9     purrr_0.3.4    
-    ## [5] readr_2.1.2     tidyr_1.2.0     tibble_3.1.5    ggplot2_3.3.6  
+    ## [5] readr_2.1.2     tidyr_1.2.0     tibble_3.1.7    ggplot2_3.3.6  
     ## [9] tidyverse_1.3.1
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] tidyselect_1.1.1 xfun_0.31        repr_1.1.3       haven_2.4.3     
-    ##  [5] colorspace_2.0-2 vctrs_0.4.1      generics_0.1.0   htmltools_0.5.2 
+    ##  [1] tidyselect_1.1.2 xfun_0.31        repr_1.1.3       haven_2.4.3     
+    ##  [5] colorspace_2.0-2 vctrs_0.4.1      generics_0.1.2   htmltools_0.5.2 
     ##  [9] base64enc_0.1-3  yaml_2.2.1       utf8_1.2.2       rlang_1.0.2     
-    ## [13] pillar_1.6.2     glue_1.6.2       withr_2.5.0      DBI_1.1.1       
+    ## [13] pillar_1.7.0     glue_1.6.2       withr_2.5.0      DBI_1.1.1       
     ## [17] dbplyr_2.1.1     modelr_0.1.8     readxl_1.4.0     lifecycle_1.0.1 
     ## [21] munsell_0.5.0    gtable_0.3.0     cellranger_1.1.0 rvest_1.0.1     
     ## [25] evaluate_0.15    knitr_1.39       tzdb_0.1.2       fastmap_1.1.0   
