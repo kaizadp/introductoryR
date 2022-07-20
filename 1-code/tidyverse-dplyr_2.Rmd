@@ -1,5 +1,5 @@
 ---
-title: "dplyr basics"
+title: "tidyverse II"
 output: github_document
 ---
 
@@ -16,13 +16,75 @@ library(tidyverse)
 
 ---
 
+## 1. arrange
 
-# `{dplyr}` functions - next level
+Sort your dataframe in ascending/descending order
+
+Example: Arrange in ascending order of height
+
+```{r}
+starwars %>% 
+  arrange(height) %>% 
+  head()
+```
+
+Example: Arrange in descending order of height: use `-`
+
+```{r}
+starwars %>% 
+  arrange(-height) %>% 
+  head()
+```
+
+---
+
+## 2. drop_na
+
+This function will remove all rows with NAs. 
+
+```{r}
+starwars %>% drop_na()
+```
+
+We dropped 59 rows, because they had at least one NA value.
+
+**Be warned:** the `drop_na()` function will drop ALL rows that have even a single instance of NA. Be very careful when using this, as you may accidentally delete more rows than you intend.
+
+More often, we want to remove NAs only from certain columns (e.g., we want to analyze the heights, so we only care about characters whose heights are provided). In that case, use `filter()`.
+
+```{r}
+starwars %>% filter(!is.na(height))
+```
+
+> `is.na()` is a conditional command that looks for NA values.  
+`filter(is.na(COLUMN_NAME))` will keep all NA values  
+`filter(!is.na(COLUMN_NAME))` will remove all NA values. Remember - `!` means "not"  
+
+---
+
+## 3. distinct
+
+This function will remove duplicate entries/values
+
+```{r}
+starwars %>% distinct()
+```
+
+This will look through the entire dataset and drop duplicate entries (rows that are an exact copy, across every single column). In our case, it does not change our dataframe because we do not have duplicate entries.  
 
 
-## distinct
+You can also use `distinct()` on a single column, to get the unique values present in that column.  
+Example: You want to know only what eye colors are recorded - not who/how many, etc.; just the different colors possible in this dataset
 
-## separate
+```{r}
+starwars %>% distinct(eye_color)
+```
+
+---
+
+## 4. separate
+
+
 
 ## starts_with and ends_with
 
