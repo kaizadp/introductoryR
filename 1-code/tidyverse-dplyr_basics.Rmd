@@ -259,14 +259,45 @@ Some other examples where you can use `mutate` to modify an existing column:
 
 ## 5. summarize
 
+The `summarize` function allows you to calculate summary statistics (mean, median, standard deviation, etc.) for your data
+
+```{r, eval=FALSE}
+starwars %>% 
+  summarise(height_mean = mean(height),
+            height_median = median(height),
+            height_sd = sd(height))
+```
+
+This line of code above gives us NA in the output - because there are some NA values in the `height` column.  
+To avoid this issue, include `na.rm = TRUE` in the arguments, to remove the NAs.
+
+```{r}
+starwars %>% 
+  summarise(height_mean = mean(height, na.rm = TRUE),
+            height_median = median(height, na.rm = TRUE),
+            height_sd = sd(height, na.rm = TRUE))
+```
+
 ## 6. group_by
 group operations
 
 
 
-## arrange
 
-## drop_na
+You can use `group_by()` with `mutate` and `summarize` to perform the calculations by group, i.e. to get summary statistics, etc. for each set of values, given a grouping column.
+
+Example: We previously calculated mean height for the entire dataset. But what if we want mean height for each species?
+
+```{r}
+starwars %>% 
+  group_by(species) %>% 
+  dplyr::summarise(height_mean = mean(height, na.rm = TRUE),
+                  n = n())
+```
+
+The `n()` function used here gives us the count, or the number of rows present in that group. So, there was only 1 from the Aleena species, but 6 Droids.
+
+> **NOTE:** because of package masking, sometimes summarize does not work well with group_by(), giving us a single value instead of grouped. The workaround for this is using the namespace (`dplyr::summarize()`)
 
 
 ---

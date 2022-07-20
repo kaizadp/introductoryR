@@ -433,13 +433,74 @@ column:
 
 ## 5. summarize
 
+The `summarize` function allows you to calculate summary statistics
+(mean, median, standard deviation, etc.) for your data
+
+``` r
+starwars %>% 
+  summarise(height_mean = mean(height),
+            height_median = median(height),
+            height_sd = sd(height))
+```
+
+This line of code above gives us NA in the output - because there are
+some NA values in the `height` column.  
+To avoid this issue, include `na.rm = TRUE` in the arguments, to remove
+the NAs.
+
+``` r
+starwars %>% 
+  summarise(height_mean = mean(height, na.rm = TRUE),
+            height_median = median(height, na.rm = TRUE),
+            height_sd = sd(height, na.rm = TRUE))
+```
+
+    ## # A tibble: 1 × 3
+    ##   height_mean height_median height_sd
+    ##         <dbl>         <int>     <dbl>
+    ## 1        174.           180      34.8
+
 ## 6. group_by
 
 group operations
 
-## arrange
+You can use `group_by()` with `mutate` and `summarize` to perform the
+calculations by group, i.e. to get summary statistics, etc. for each set
+of values, given a grouping column.
 
-## drop_na
+Example: We previously calculated mean height for the entire dataset.
+But what if we want mean height for each species?
+
+``` r
+starwars %>% 
+  group_by(species) %>% 
+  dplyr::summarise(height_mean = mean(height, na.rm = TRUE),
+                  n = n())
+```
+
+    ## # A tibble: 38 × 3
+    ##    species   height_mean     n
+    ##    <chr>           <dbl> <int>
+    ##  1 Aleena            79      1
+    ##  2 Besalisk         198      1
+    ##  3 Cerean           198      1
+    ##  4 Chagrian         196      1
+    ##  5 Clawdite         168      1
+    ##  6 Droid            131.     6
+    ##  7 Dug              112      1
+    ##  8 Ewok              88      1
+    ##  9 Geonosian        183      1
+    ## 10 Gungan           209.     3
+    ## # … with 28 more rows
+
+The `n()` function used here gives us the count, or the number of rows
+present in that group. So, there was only 1 from the Aleena species, but
+6 Droids.
+
+> **NOTE:** because of package masking, sometimes summarize does not
+> work well with group_by(), giving us a single value instead of
+> grouped. The workaround for this is using the namespace
+> (`dplyr::summarize()`)
 
 ------------------------------------------------------------------------
 
