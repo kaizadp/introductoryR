@@ -1,4 +1,3 @@
-[![HitCount](http://hits.dwyl.com/kaizadp/introductoryR.svg)](http://hits.dwyl.com/kaizadp/introductoryR)
 
 introductoryR
 ================
